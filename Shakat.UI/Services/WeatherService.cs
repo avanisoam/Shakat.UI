@@ -17,8 +17,8 @@ namespace Shakat.UI.Services
         {
             try
             {
-                //var response = await _httpClient.GetFromJsonAsync<IEnumerable<WeatherForecastDto>>("https://kunba.in/WeatherForecast");
-                var response = await _httpClient.GetFromJsonAsync<IEnumerable<WeatherForecastDto>>("https://localhost:44395/WeatherForecast");
+                var response = await _httpClient.GetFromJsonAsync<IEnumerable<WeatherForecastDto>>("https://kunba.in/WeatherForecast");
+                //var response = await _httpClient.GetFromJsonAsync<IEnumerable<WeatherForecastDto>>("https://localhost:44395/WeatherForecast");
 
                 return response;
             }
