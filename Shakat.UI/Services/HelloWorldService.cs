@@ -15,7 +15,8 @@ namespace Shakat.UI.Services
         {
             // https://jasonwatmore.com/post/2020/09/20/blazor-webassembly-http-get-request-examples
 
-            using var httpResponse = await _httpClient.GetAsync("https://localhost:44395/api/HelloWorld");
+            // using var httpResponse = await _httpClient.GetAsync("https://localhost:44395/api/HelloWorld");
+            using var httpResponse = await _httpClient.GetAsync("https://kunba.in/api/helloworld");
 
             if (!httpResponse.IsSuccessStatusCode)
             {
