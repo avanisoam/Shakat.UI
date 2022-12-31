@@ -1,0 +1,143 @@
+﻿@page "/fullload"
+
+<h3>Full Load</h3>
+
+	
+<EditForm Model="@NewOrder">
+
+    <hr />
+
+   @* <div class="form-group row">
+        <label for="firstName" class="col-sm-2 col-form-label">
+            Source
+        </label>
+        <div class="col-sm-10">
+            <InputText id="firstName" class="form-control" placeholder="First Name"
+                       @bind-Value="NewOrder.Source" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="lastName" class="col-sm-2 col-form-label">
+            Destination
+        </label>
+        <div class="col-sm-10">
+            <InputText id="lastName" class="form-control" placeholder="Last Name"
+                       @bind-Value="NewOrder.Destination" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label">
+            Email
+        </label>
+        <div class="col-sm-10">
+            <InputText id="email" class="form-control" placeholder="Email"
+                       @bind-Value="NewOrder.Type" />
+        </div>
+    </div>*@
+
+	<div class="container px-4" id="hanging-icons">
+
+        @*<h2 class="pb-2 border-bottom">Term</h2>*@
+
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">            
+			<div class="col d-flex align-items-start">
+				<InputText id="source" class="form-control" style="height:49px;" placeholder="Source City" @bind-Value="NewOrder.Source" />				
+			</div>
+
+			<div class="col d-flex align-items-start">
+				<InputText id="destination" class="form-control" style="height:49px;" placeholder="Destination City" @bind-Value="NewOrder.Destination" />
+			</div>
+
+			<div class="col d-flex align-items-start">
+				<span style="position: absolute;margin-left: -22px;margin-top: 13px; font-size: 15px;">KG</span>
+				<InputNumber id="vecweight" step=".50" class="form-control form-control-xs" style="height:49px;" @bind-Value="@NewOrder.Weight" @oninput="@((e) => @NewOrder.Weight = Convert.ToDouble(e.Value))" />								
+			</div>
+        </div>
+
+    </div>
+
+	@*<div class="container px-4 py-5" id="hanging-icons">*@
+	<div class="container px-4" id="hanging-icons">
+
+        <VehicleSelector />
+
+    </div>
+
+	<div class="container px-4" id="hanging-icons">
+
+        @*<h2 class="pb-2 border-bottom">Term</h2>*@
+
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">            
+			<div class="col d-flex align-items-start">
+				<select name="materialtype" id="cf_materialtype" class="form-select" aria-label="Default select example">
+					<option value="">Material Type </option>
+										
+					<option value="4">Chemicals</option>
+										
+					<option value="6">Container</option>
+										
+					<option value="7">Cotton Seeds</option>
+										
+					<option value="8">Electronics Consumer Durables</option>
+										
+					<option value="9">Fertilizers</option>
+										
+					<option value="10">Fruits and Vegetables</option>
+										
+					<option value="11">Furniture and Wood Products</option>
+										
+					<option value="12">Household Goods</option>
+										
+					<option value="13">Industrial Equipment</option>
+										
+					<option value="14">Iron Sheets or Bars or Scraps</option>
+										
+					<option value="43">Glass</option>
+										
+					<option value="16">Liquid in Drums</option>
+										
+					<option value="18">Machinery New or Old</option>
+										
+					<option value="19">Medicals</option>
+										
+					<option value="20">Metal and steels</option>
+										
+					<option value="21">Others</option>
+										
+					<option value="22">Packed Food</option>
+										
+					<option value="23">Plastic Pipe or Other Plastic Products</option>
+										
+					<option value="24">Books and Paper Rolls</option>
+										
+					<option value="25">Refrigerated Goods</option>
+										
+					<option value="26">Crop and Agriculture Product</option>
+										
+					<option value="29">Stones and Tiles</option>
+										
+					<option value="30">Textiles</option>
+										
+					<option value="31">Tyre and Rubber Product</option>
+										
+					<option value="32">Vehicle and Cars</option>
+										
+					<option value="33">Glass Material</option>
+										
+					<option value="34">Transformer Equipments</option>										
+				</select>
+			</div>
+
+			<div class="col d-flex align-items-start">
+				<input type="date" placeholder="Select Scheduled Date" id="datepicker" class="form-control" @bind="@NewOrder.Date" />
+			</div>
+
+			<div class="col d-flex align-items-start">
+				<button class="btn btn-primary">GET FARE</button>
+			</div>
+        </div>
+
+    </div>
+
+</EditForm>
+

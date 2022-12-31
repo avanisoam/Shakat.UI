@@ -1,0 +1,150 @@
+﻿<div class="vehicle-selector row">
+	<div class="col-sm-3"><span id="select_truck" style="color: rgb(198, 12, 12); font-weight: bold; text-align: right; font-size: 16px; display: none;">Select Preferred Truck &gt;&gt;</span></div>
+	<div class="col-sm-6 row">
+		<div class="col-sm-4">
+			<input type="radio" class="truck-radio" name="truck-type" id="open">
+			<label class="truck-label" for="open" data-toggle="modal" data-target="#opentruckModal">
+				<div style="">
+					<img src="images/Open body truck.png" alt="" style="width:60px; height:60px;">
+					<span>Open Truck</span>
+				</div>
+			</label>
+			<div class="modal fade" id="opentruckModal" role="dialog" data-backdrop="static" data-keyboard="false" style="display: none;">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title text-center">Open Truck</h4>
+						</div>
+						<div class="modal-body">
+							<div class="sub-type-radio-collection row">
+																							<div class="col-sm-3 col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="openTruck_1" value="1">
+										<label class="truck-subtype-label" onclick="setTruck('Open Truck 14 Feet 3.5 Tons')" for="openTruck_1">14 Feet 3.5 Tons</label>
+									</div>
+																							<div class="col-sm-3 col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="openTruck_3" value="3">
+										<label class="truck-subtype-label" onclick="setTruck('Open Truck 19 Feet 7.5 Tons')" for="openTruck_3">19 Feet 7.5 Tons</label>
+									</div>
+																							<div class="col-sm-3 col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="openTruck_4" value="4">
+										<label class="truck-subtype-label" onclick="setTruck('Open Truck 20 Feet 10 Tons')" for="openTruck_4">20 Feet 10 Tons</label>
+									</div>
+																							<div class="col-sm-3 col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="openTruck_5" value="5">
+										<label class="truck-subtype-label" onclick="setTruck('Open Truck 10 Wheel 19 Tons')" for="openTruck_5">10 Wheel 19 Tons</label>
+									</div>
+																							<div class="col-sm-3 col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="openTruck_6" value="6">
+										<label class="truck-subtype-label" onclick="setTruck('Open Truck 12 Wheel 25 Tons')" for="openTruck_6">12 Wheel 25 Tons</label>
+									</div>
+																							<div class="col-sm-3 col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="openTruck_7" value="7">
+										<label class="truck-subtype-label" onclick="setTruck('Open Truck 14 Wheel 30 Tons')" for="openTruck_7">14 Wheel 30 Tons</label>
+									</div>
+																					</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<input type="radio" class="truck-radio" name="truck-type" id="container">
+			<label class="truck-label" for="container" data-toggle="modal" data-target="#containertruckModal">
+				<div>
+					<img src="images/Container.png" alt="" style="width:60px; height:60px;">
+					<span>Container</span>
+				</div>
+			</label>
+			<div class="modal fade" id="containertruckModal" role="dialog" data-backdrop="static" data-keyboard="false" style="display: none;">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title text-center">Truck Container</h4>
+						</div>
+						<div class="modal-body">
+							<div class="sub-type-radio-collection row">
+																							<div class="col-sm-3  col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="containerTruck_15" value="15">
+										<label class="truck-subtype-label" onclick="setTruck('Truck Container 20 Feet SXL 6 Tons')" for="containerTruck_15">20 Feet SXL 6 Tons</label>
+									</div>
+																							<div class="col-sm-3  col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="containerTruck_17" value="17">
+										<label class="truck-subtype-label" onclick="setTruck('Truck Container 32 Feet MXL 15 Tons')" for="containerTruck_17">32 Feet MXL 15 Tons</label>
+									</div>
+																							<div class="col-sm-3  col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="containerTruck_23" value="23">
+										<label class="truck-subtype-label" onclick="setTruck('Truck Container 32 feet SXL 7 Tons')" for="containerTruck_23">32 feet SXL 7 Tons</label>
+									</div>
+																					</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<input type="radio" class="truck-radio" name="truck-type" id="trailer">
+			<label class="truck-label" for="trailer" data-toggle="modal" data-target="#trailertruckModal">
+				<div>
+					<img src="images/Trailer.png" alt="" style="width:60px; height:60px;">
+					<span>Trailer</span>
+				</div>
+			</label>
+			<div class="modal fade" id="trailertruckModal" role="dialog" data-backdrop="static" data-keyboard="false" style="display: none;">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title text-center">Trailer</h4>
+						</div>
+						<div class="modal-body">
+							<div class="sub-type-radio-collection row">
+																							<div class="col-sm-3  col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="trailerTruck_10" value="10">
+										<label class="truck-subtype-label" onclick="setTruck('Trailer 40 Feet Semi Bed 22 Tons')" for="trailerTruck_10">40 Feet Semi Bed 22 Tons</label>
+									</div>
+																							<div class="col-sm-3  col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="trailerTruck_12" value="12">
+										<label class="truck-subtype-label" onclick="setTruck('Trailer 40 Feet Semi Bed 30 Tons')" for="trailerTruck_12">40 Feet Semi Bed 30 Tons</label>
+									</div>
+																							<div class="col-sm-3  col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="trailerTruck_13" value="13">
+										<label class="truck-subtype-label" onclick="setTruck('Trailer 40 Feet Flat Bed 22 Tons')" for="trailerTruck_13">40 Feet Flat Bed 22 Tons</label>
+									</div>
+																							<div class="col-sm-3  col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="trailerTruck_14" value="14">
+										<label class="truck-subtype-label" onclick="setTruck('Trailer 40 Feet Flat Bed 30 Tons')" for="trailerTruck_14">40 Feet Flat Bed 30 Tons</label>
+									</div>
+																							<div class="col-sm-3  col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="trailerTruck_26" value="26">
+										<label class="truck-subtype-label" onclick="setTruck('Trailer 40 Feet Flat Bed 25 Tons')" for="trailerTruck_26">40 Feet Flat Bed 25 Tons</label>
+									</div>
+																							<div class="col-sm-3  col-xs-6">
+										<input class="truck-subtype-radio" name="vehicletype" type="radio" id="trailerTruck_27" value="27">
+										<label class="truck-subtype-label" onclick="setTruck('Trailer 40 Feet Semi Bed 25 Tons')" for="trailerTruck_27">40 Feet Semi Bed 25 Tons</label>
+									</div>
+																					</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-3"></div>
+</div>
