@@ -1,3 +1,54 @@
+/* /Pages/Load.razor.rz.scp.css */
+/*<style >*/
+.truck-label div[b-ogszf1e0ga] {
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    background-color: white;
+}
+
+@media only screen and (max-width:600px) {
+    .truck-label[b-ogszf1e0ga] {
+        margin-left: 0
+    }
+
+        .truck-label div[b-ogszf1e0ga] {
+            width: 85px;
+            margin-left: 0
+        }
+}
+
+.truck-radio[b-ogszf1e0ga] {
+    display: none;
+}
+
+    .truck-radio:checked + label div[b-ogszf1e0ga] {
+        background-color: #edabad;
+    }
+
+.truck-subtype-radio[b-ogszf1e0ga] {
+    display: none;
+}
+
+.truck-subtype-label[b-ogszf1e0ga] {
+    width: 100px;
+    text-align: center;
+    border: 1px solid rgb(214, 214, 214);
+    border-radius: 15px;
+    ;
+    padding: 2%;
+    margin-top: 20px;
+}
+
+.truck-subtype-radio:checked + label[b-ogszf1e0ga] {
+    background-color: #edabad;
+}
+
+/*</style >
+*/
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-hsw4xxwoo4] {
     position: relative;
