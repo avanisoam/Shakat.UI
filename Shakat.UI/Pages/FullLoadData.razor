@@ -1,0 +1,30 @@
+﻿@page "/allload"
+
+<h3>FullLoadData</h3>
+
+
+@if (LogisticsOrders == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Source</th>
+                <th>Destination</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in LogisticsOrders)
+            {
+                <tr>
+                    <td>@item.SourceCity</td>
+                    <td>@item.DestinationCity</td>
+                </tr>
+            }
+        </tbody>
+</table>
+}

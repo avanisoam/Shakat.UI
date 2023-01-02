@@ -2,8 +2,14 @@
 
 <h3>Full Load</h3>
 
+@if (LogisticsOrders == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
 	
-<EditForm Model="@NewOrder">
+<EditForm Model="@newLogisticsOrderObject">
 
     <hr />
 
@@ -41,16 +47,16 @@
 
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">            
 			<div class="col d-flex align-items-start">
-				<InputText id="source" class="form-control" style="height:49px;" placeholder="Source City" @bind-Value="NewOrder.Source" />				
+				<InputText id="source" class="form-control" style="height:49px;" placeholder="Source City" @bind-Value="newLogisticsOrderObject.SourceCity" />				
 			</div>
 
 			<div class="col d-flex align-items-start">
-				<InputText id="destination" class="form-control" style="height:49px;" placeholder="Destination City" @bind-Value="NewOrder.Destination" />
+				<InputText id="destination" class="form-control" style="height:49px;" placeholder="Destination City" @bind-Value="newLogisticsOrderObject.DestinationCity" />
 			</div>
 
 			<div class="col d-flex align-items-start">
 				<span style="position: absolute;margin-left: -22px;margin-top: 13px; font-size: 15px;">KG</span>
-				<InputNumber id="vecweight" step=".50" class="form-control form-control-xs" style="height:49px;" @bind-Value="@NewOrder.Weight" @oninput="@((e) => @NewOrder.Weight = Convert.ToDouble(e.Value))" />								
+				<InputNumber id="vecweight" step=".50" class="form-control form-control-xs" style="height:49px;" @bind-Value="@newLogisticsOrderObject.WeightInKg" @oninput="@((e) => @newLogisticsOrderObject.WeightInKg = Convert.ToDouble(e.Value))" />								
 			</div>
         </div>
 
@@ -69,7 +75,7 @@
 
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">            
 			<div class="col d-flex align-items-start">
-				<select name="materialtype" id="cf_materialtype" class="form-select" aria-label="Default select example">
+				<select name="materialtype" id="cf_materialtype" class="form-select" @onchange="OnValueChanged" aria-label="Default select example">
 					<option value="">Material Type </option>
 										
 					<option value="4">Chemicals</option>
@@ -129,15 +135,34 @@
 			</div>
 
 			<div class="col d-flex align-items-start">
-				<input type="date" placeholder="Select Scheduled Date" id="datepicker" class="form-control" @bind="@NewOrder.Date" />
+				<input type="date" placeholder="Select Scheduled Date" id="datepicker" class="form-control" @bind="@newLogisticsOrderObject.ScheduledDate" />
 			</div>
 
 			<div class="col d-flex align-items-start">
-				<button class="btn btn-primary">GET FARE</button>
+				<button class="btn btn-primary" @onclick="AddItem">GET FARE</button>
 			</div>
         </div>
 
     </div>
 
 </EditForm>
-
+}
+<br />
+<table class="table">
+        <thead>
+            <tr>
+                <th>Source</th>
+                <th>Destination</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in LogisticsOrders)
+            {
+                <tr>
+                    <td>@item.SourceCity</td>
+                    <td>@item.DestinationCity</td>
+                </tr>
+            }
+        </tbody>
+</table>

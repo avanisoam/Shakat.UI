@@ -15,4 +15,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddScoped<IWeatherService, WeatherService>();
 builder.Services.AddScoped<IHelloWorldService, HelloWorldService>();
 
+builder.Services.AddScoped<ILogisticsOrderService, LogisticsOrderService>();
+
 await builder.Build().RunAsync();
