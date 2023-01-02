@@ -17,6 +17,22 @@ namespace Shakat.UI.Services
         {
             try
             {
+                //logisticsOrderRequestDto = new LogisticsOrderRequestDto
+                //{
+                //    CustomerId = 1,
+                //    ProductId = 2,
+                                    //    //Quantity = 40,
+                                    //    //Price = 1000,
+                                    //    //ShippingAddress = "chennai",
+                                    //    //OrderStatus = "Placed",
+                //    SourceCity = "Bhiwani",
+                //    DestinationCity = "Gurgaon",
+                //    WeightInKg = 10000,
+                //    VehicleSubTypeId = 1,
+                //    MaterialTypeId = 2,
+                //    ScheduledDate = new DateTime(1984, 1, 30)
+                //};
+
                 var request = await _httpClient.PostAsJsonAsync<LogisticsOrderRequestDto>("https://localhost:44395/api/LogisticOrders", logisticsOrderRequestDto);
 
                 if (request.IsSuccessStatusCode)
@@ -42,11 +58,11 @@ namespace Shakat.UI.Services
             }
         }
 
-        public async Task<IEnumerable<LogisticsOrderRequestDto>> GetAllLogisticsOrders()
+        public async Task<IEnumerable<LogisticsOrderResponseDto>> GetAllLogisticsOrders()
         {
             try
             {
-                var response = await _httpClient.GetFromJsonAsync<IEnumerable<LogisticsOrderRequestDto>>("https://localhost:44395/api/LogisticOrders");
+                var response = await _httpClient.GetFromJsonAsync<IEnumerable<LogisticsOrderResponseDto>>("https://localhost:44395/api/LogisticOrders");
                 return response;
             }
             catch (Exception)

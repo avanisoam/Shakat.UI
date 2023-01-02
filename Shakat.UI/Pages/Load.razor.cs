@@ -13,7 +13,7 @@ namespace Shakat.UI.Pages
 
         public LogisticsOrderRequestDto newLogisticsOrderObject { get; set; } = new();
 
-        public IEnumerable<LogisticsOrderRequestDto> LogisticsOrders { get; set; } = new List<LogisticsOrderRequestDto>();
+        public IEnumerable<LogisticsOrderResponseDto> LogisticsOrders { get; set; } = new List<LogisticsOrderResponseDto>();
 
         [Inject]
         NavigationManager MyNavigationManager { get; set; }
@@ -29,8 +29,9 @@ namespace Shakat.UI.Pages
             newLogisticsOrderObject.VehicleSubTypeId = 1;
             newLogisticsOrderObject.ProductId = 5;
 
-             //LogisticsOrders = await LogisticsOrderService.GetAllLogisticsOrders();
+            LogisticsOrders = await LogisticsOrderService.GetAllLogisticsOrders();
 
+            
             //NewOrder = new Order
             //{
             //    Id = 1,
@@ -52,7 +53,7 @@ namespace Shakat.UI.Pages
 
             newLogisticsOrderObject = new();
 
-            //LogisticsOrders = await LogisticsOrderService.GetAllLogisticsOrders();
+            LogisticsOrders = await LogisticsOrderService.GetAllLogisticsOrders();
 
             MyNavigationManager.NavigateTo("/fullload");
         }

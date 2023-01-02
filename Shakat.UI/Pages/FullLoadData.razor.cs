@@ -10,7 +10,7 @@ namespace Shakat.UI.Pages
         [Inject]
         public ILogisticsOrderService LogisticsOrderService { get; set; }
 
-        public IEnumerable<LogisticsOrderRequestDto> LogisticsOrders { get; set; } = new List<LogisticsOrderRequestDto>();
+        public IEnumerable<LogisticsOrderResponseDto> LogisticsOrders { get; set; } = new List<LogisticsOrderResponseDto>();
 
         protected override async Task OnInitializedAsync()
         {

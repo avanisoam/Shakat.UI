@@ -5,7 +5,7 @@ namespace Shakat.UI.Services.Contracts
 {
     public interface ILogisticsOrderService
     {
-        Task<IEnumerable<LogisticsOrderRequestDto>> GetAllLogisticsOrders();
+        Task<IEnumerable<LogisticsOrderResponseDto>> GetAllLogisticsOrders();
         Task<LogisticsOrderRequestDto> CreateLogisticOrder(LogisticsOrderRequestDto logisticsOrderRequestDto);
     }
 }
