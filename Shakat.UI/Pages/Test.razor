@@ -1,0 +1,28 @@
+﻿@page "/Test"
+
+<div>
+    <EditForm Model="@_model">
+       <InputRadioGroup @bind-Value="_model.Number"> 
+            <div>
+                <InputRadio id="1radio" Value="1" checked="checked" />
+                <label for="1radio">1</label>
+            </div>
+
+            <div>
+                <InputRadio id="2radio" Value="2" />
+                <label for="2radio">2</label>
+            </div>
+        </InputRadioGroup>
+
+    </EditForm> 
+</div>
+
+
+@code {
+    private TestModel _model = new() { Number = 1 };
+
+    public class TestModel
+    {
+        public int Number { get; set; }
+    }
+}

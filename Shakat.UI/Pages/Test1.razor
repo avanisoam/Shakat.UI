@@ -1,0 +1,52 @@
+﻿@page "/Test1"
+@using System.ComponentModel.DataAnnotations
+
+<div>
+    <EditForm Model="@_model" OnValidSubmit="@HandleValidSubmit">
+
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+       <InputRadioGroup @bind-Value="_model.Rating"> 
+            
+           @*<div>
+                <InputRadio id="1radio" Value="1" checked="checked" />
+                <label for="1radio">1</label>
+            </div>
+
+            <div>
+                <InputRadio id="2radio" Value="2" />
+                <label for="2radio">2</label>
+            </div>*@
+
+            @for (int i = 1; i <= 5; i++)
+            {
+                var str = @i + "radio"; 
+                 <div>
+                    <InputRadio id="@str" Value="@i" />
+                    <label for="str">@i</label>
+                </div>
+            }
+
+        </InputRadioGroup>
+
+         <button type="submit">Submit</button>
+
+    </EditForm> 
+</div>
+
+
+@code {
+    private TestModel _model = new() { Rating = 1 };
+
+    public class TestModel
+    {
+        [Range(1, 5)]
+        public int Rating { get; set; }
+    }
+
+    private void HandleValidSubmit()
+    {
+        //...
+    }
+}

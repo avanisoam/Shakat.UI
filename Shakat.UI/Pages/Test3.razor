@@ -1,0 +1,115 @@
+﻿@page "/Test3"
+@using System.ComponentModel.DataAnnotations
+
+
+
+<div>
+    <EditForm Model="@_model" OnValidSubmit="@HandleValidSubmit">
+
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <p>
+            <InputRadioGroup @bind-Value="_model.Manufacturer">
+                Manufacturer:
+                <br>
+                @*foreach(int i in Enum.GetValues(typeof(Manufacturers)))
+                {
+
+                }*@
+
+                @foreach (var manufacturer in (Manufacturers[])Enum.GetValues(typeof(Manufacturers)))
+                {
+                    <InputRadio Value="@manufacturer" />
+                    <text>&nbsp;</text>@manufacturer<br>
+                }
+            </InputRadioGroup>
+        </p>
+
+        <p>
+            Select one engine and one color. Recommendations are paired but any 
+            combination of engine and color is allowed:<br>
+            <InputRadioGroup Name="engine" @bind-Value="_model.Engine">
+                <InputRadioGroup Name="color" @bind-Value="_model.Color">
+                    <InputRadio Name="engine" Value="@Engines.Ion" />
+                    Engine: Ion<br>
+                    <InputRadio Name="color" Value="@Colors.ImperialRed" />
+                    Color: Imperial Red<br><br>
+                    <InputRadio Name="engine" Value="@Engines.Plasma" />
+                    Engine: Plasma<br>
+                    <InputRadio Name="color" Value="@Colors.SpacecruiserGreen" />
+                    Color: Spacecruiser Green<br><br>
+                    <InputRadio Name="engine" Value="@Engines.Fusion" />
+                    Engine: Fusion<br>
+                    <InputRadio Name="color" Value="@Colors.StarshipBlue" />
+                    Color: Starship Blue<br><br>
+                    <InputRadio Name="engine" Value="@Engines.Warp" />
+                    Engine: Warp<br>
+                    <InputRadio Name="color" Value="@Colors.VoyagerOrange" />
+                    Color: Voyager Orange
+                </InputRadioGroup>
+            </InputRadioGroup>
+        </p>
+
+       <InputRadioGroup @bind-Value="_model.Rating"> 
+            
+           @*<div>
+                <InputRadio id="1radio" Value="1" checked="checked" />
+                <label for="1radio">1</label>
+            </div>
+
+            <div>
+                <InputRadio id="2radio" Value="2" />
+                <label for="2radio">2</label>
+            </div>*@
+
+            @for (int i = 1; i <= 5; i++)
+            {
+                var str = @i + "radio"; 
+                 <div>
+                    <InputRadio id="@str" Value="@i" />
+                    <label for="str">@i</label>
+                </div>
+            }
+
+        </InputRadioGroup>
+
+         <button type="submit">Submit</button>
+
+    </EditForm> 
+</div>
+
+
+@code {
+
+    public enum Manufacturers { SpaceX, NASA, ULA, VirginGalactic, Unknown }
+
+    public enum Colors { ImperialRed, SpacecruiserGreen, StarshipBlue, VoyagerOrange }
+    
+    public enum Engines { Ion, Plasma, Fusion, Warp }
+
+
+    private TestModel _model = new() { Rating = 1 };
+
+    public class TestModel
+    {
+        [Range(1, 5)]
+        public int Rating { get; set; }
+        
+        [Required]
+        [Range(typeof(Manufacturers), nameof(Manufacturers.SpaceX),
+        nameof(Manufacturers.VirginGalactic), ErrorMessage = "Pick a manufacturer.")]
+        public Manufacturers Manufacturer { get; set; } = Manufacturers.Unknown;
+
+        [Required, EnumDataType(typeof(Colors))]
+        public Colors? Color { get; set; } = null;
+
+        [Required, EnumDataType(typeof(Engines))]
+        public Engines? Engine { get; set; } = null;
+    }
+
+    private void HandleValidSubmit()
+    {
+        //...
+    }
+}
