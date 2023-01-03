@@ -17,5 +17,6 @@ builder.Services.AddScoped<IHelloWorldService, HelloWorldService>();
 
 builder.Services.AddScoped<ILogisticsOrderService, LogisticsOrderService>();
 builder.Services.AddScoped<IVehicleSubTypeService, VehicleSubTypeService>();
+builder.Services.AddScoped<IVehicleTypeService, VehicleTypeService>();
 
 await builder.Build().RunAsync();
