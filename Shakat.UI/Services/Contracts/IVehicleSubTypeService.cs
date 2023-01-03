@@ -10,6 +10,6 @@ namespace Shakat.UI.Services.Contracts
 
         Task<VehicleSubTypeDto> UpdateSubType(VehicleSubTypeDto vehicleSubTypeDto);
 
-        Task<VehicleSubTypeDto> Delete(VehicleSubTypeDto vehicleSubTypeDto);
+        Task<VehicleSubTypeDto> Delete(int id);
     }
 }
