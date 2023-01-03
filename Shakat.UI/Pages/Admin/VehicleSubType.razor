@@ -1,0 +1,47 @@
+﻿@page "/admin/vehiclesubtype/{Action?}/{Id:int?}"
+
+<h3>Admin - VehicleSubType</h3>
+
+@if (SubVehicles == null)
+{
+    <p><em>Loading...</em></p>
+}
+
+else
+{
+    
+
+<p>
+        <NavLink href="admin/vehiclesubtype/Create">Create New</NavLink>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Language</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in SubVehicles)
+            {
+                <tr>
+                    <td>@item.VehicleSubTypeInfoId</td>
+                    <td>@item.SubType</td>
+                    <td>
+                        <NavLink href="@($"admin/vehiclesubtype/Edit/{item.VehicleSubTypeInfoId}")">Edit</NavLink> | 
+                        <NavLink href="@($"admin/vehiclesubtype/Details/{item.VehicleSubTypeInfoId}")">Details</NavLink> | 
+                        <NavLink href="@($"admin/vehiclesubtype/Delete/{item.VehicleSubTypeInfoId}")">Delete</NavLink>                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+    [Parameter]
+    public string? Action { get; set; }
+
+    [Parameter]
+    public int? Id { get; set; }
+}

@@ -16,5 +16,6 @@ builder.Services.AddScoped<IWeatherService, WeatherService>();
 builder.Services.AddScoped<IHelloWorldService, HelloWorldService>();
 
 builder.Services.AddScoped<ILogisticsOrderService, LogisticsOrderService>();
+builder.Services.AddScoped<IVehicleSubTypeService, VehicleSubTypeService>();
 
 await builder.Build().RunAsync();
