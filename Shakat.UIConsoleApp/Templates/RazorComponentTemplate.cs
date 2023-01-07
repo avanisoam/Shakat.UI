@@ -188,8 +188,17 @@ else
     <table class=""table"">
         <thead>
             <tr>
-                <th>Vehicle Id</th>
-                <th>Vehicle Type</th>
+", "{", "}", model, dtoObject);
+
+            foreach (var props in keyValuePairs)
+            {
+                sourceBuilder.AppendFormat(@"
+                <th>{4}</th>
+", "{", "}", model, dtoObject, props.Key, props.Value);
+
+            }
+
+            sourceBuilder.AppendFormat(@"
                 <th></th>
             </tr>
         </thead>
@@ -197,8 +206,17 @@ else
             @foreach (var item in {3}s)
             {0}
                 <tr>
-                    <td>@item.{2}Id</td>
-                    <td>@item.TrackingNumber</td>
+", "{", "}", model, dtoObject);
+
+            foreach (var props in keyValuePairs)
+            {
+                sourceBuilder.AppendFormat(@"
+                    <td>@item.{4}</td>
+", "{", "}", model, dtoObject, props.Key, props.Value);
+
+            }
+
+            sourceBuilder.AppendFormat(@"
                     <td>
                         <NavLink href=""@($""admin/{2}/Edit/{0}item.{2}Id{1}"")"">Edit</NavLink> | 
                         <NavLink href=""@($""admin/{2}/Details/{0}item.{2}Id{1}"")"">Details</NavLink> | 

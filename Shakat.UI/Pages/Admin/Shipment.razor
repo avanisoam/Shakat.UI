@@ -273,8 +273,17 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Vehicle Id</th>
-                <th>Vehicle Type</th>
+
+                <th>ShipmentId</th>
+
+                <th>OrderId</th>
+
+                <th>RouteId</th>
+
+                <th>TrackingNumber</th>
+
+                <th>Status</th>
+
                 <th></th>
             </tr>
         </thead>
@@ -282,8 +291,17 @@ else
             @foreach (var item in shipmentDtos)
             {
                 <tr>
+
                     <td>@item.ShipmentId</td>
+
+                    <td>@item.OrderId</td>
+
+                    <td>@item.RouteId</td>
+
                     <td>@item.TrackingNumber</td>
+
+                    <td>@item.Status</td>
+
                     <td>
                         <NavLink href="@($"admin/Shipment/Edit/{item.ShipmentId}")">Edit</NavLink> | 
                         <NavLink href="@($"admin/Shipment/Details/{item.ShipmentId}")">Details</NavLink> | 
