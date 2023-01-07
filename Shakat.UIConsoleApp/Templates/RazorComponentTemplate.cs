@@ -9,7 +9,7 @@ namespace Shakat.UIConsoleApp.Templates
 {
     public class RazorComponentTemplate : ITemplate
     {
-        public StringBuilder GetTemplate(string model, Dictionary<string, string> keyValuePairs)
+        public StringBuilder GetTemplate(string model, Dictionary<string, Dictionary<string, string>> keyValuePairs)
         {
             string dtoObject = $"{model}Dto".FirstCharToLowerCase();
 
@@ -45,7 +45,7 @@ else if (Action == ""Create"")
             {
                 sourceBuilder.AppendFormat(@"
             <dt class = ""col-sm-2"">
-               {4} - {5}
+               {6} - {5}
             </dt>
             <dd class = ""col-sm-12"">
                 <div class=""form-group"">
@@ -53,7 +53,7 @@ else if (Action == ""Create"")
                     <span asp-validation-for=""Name"" class=""text-danger""></span>
                 </div>
             </dd>
-", "{", "}", model, dtoObject, props.Key, props.Value);
+", "{", "}", model, dtoObject, props.Key, props.Value.First().Key, props.Value.First().Value);
 
                 //sourceBuilder.AppendLine($@"Console.WriteLine(@""{props.Key} - {props.Value}"");");
             }
@@ -82,7 +82,7 @@ else if (Action == ""Edit"")
             {
                 sourceBuilder.AppendFormat(@"
             <dt class = ""col-sm-2"">
-               {4} - {5}
+               {6}
             </dt>
             <dd class = ""col-sm-12"">
                  <div class=""form-group"">
@@ -90,7 +90,7 @@ else if (Action == ""Edit"")
                     <span asp-validation-for=""Name"" class=""text-danger""></span>
                 </div>
             </dd>
-", "{", "}", model, dtoObject, props.Key, props.Value);
+", "{", "}", model, dtoObject, props.Key, props.Value.First().Key, props.Value.First().Value);
 
             }
 
@@ -122,12 +122,12 @@ else if (Action == ""Details"")
             {
                 sourceBuilder.AppendFormat(@"
             <dt class = ""col-sm-2"">
-               {4} - {5}
+               {6}
             </dt>
             <dd class = ""col-sm-10"">
                 @editItem.{4}
             </dd>
-", "{", "}", model, dtoObject, props.Key, props.Value);
+", "{", "}", model, dtoObject, props.Key, props.Value.First().Key, props.Value.First().Value);
 
             }
 
@@ -155,12 +155,12 @@ else if (Action == ""Delete"")
             {
                 sourceBuilder.AppendFormat(@"
             <dt class = ""col-sm-2"">
-               {4} - {5}
+               {6}
             </dt>
             <dd class = ""col-sm-10"">
                 @editItem.{4}
             </dd>
-", "{", "}", model, dtoObject, props.Key, props.Value);
+", "{", "}", model, dtoObject, props.Key, props.Value.First().Key, props.Value.First().Value);
 
             }
 
@@ -193,8 +193,8 @@ else
             foreach (var props in keyValuePairs)
             {
                 sourceBuilder.AppendFormat(@"
-                <th>{4}</th>
-", "{", "}", model, dtoObject, props.Key, props.Value);
+                <th>{6}</th>
+", "{", "}", model, dtoObject, props.Key, props.Value.First().Key, props.Value.First().Value);
 
             }
 
@@ -212,7 +212,7 @@ else
             {
                 sourceBuilder.AppendFormat(@"
                     <td>@item.{4}</td>
-", "{", "}", model, dtoObject, props.Key, props.Value);
+", "{", "}", model, dtoObject, props.Key, props.Value.First().Key, props.Value.First().Value);
 
             }
 

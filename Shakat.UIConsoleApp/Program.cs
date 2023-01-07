@@ -1,6 +1,8 @@
 ﻿using Shakat.UIConsoleApp.Templates;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -40,14 +42,42 @@ namespace Shakat.UIConsoleApp
             Type MyLoadClass = MyDALL.GetTypes().FirstOrDefault(t => t.Name == args[2]);
             object obj = Activator.CreateInstance(MyLoadClass);
 
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            Dictionary<string, Dictionary<string, string>> dict = new Dictionary<string, Dictionary<string, string>>();
 
             foreach (var prop in obj.GetType().GetProperties())
             {
                 Console.WriteLine("Name: {0} Type: {1} Value: {2}",
                     prop.Name, prop.PropertyType.Name, prop.GetValue(obj, null));
 
-                dict.Add(prop.Name, prop.PropertyType.Name);
+                var dd = prop.GetCustomAttribute(typeof(DisplayNameAttribute)) as DisplayNameAttribute;
+                if (dd != null)
+                {
+                    var d = new Dictionary<string, string>();
+                    d.Add(prop.PropertyType.Name, dd.DisplayName);
+
+                    dict.Add(prop.Name, d);
+                }
+                else
+                {
+                    var d = new Dictionary<string, string>();
+                    d.Add(prop.PropertyType.Name, prop.Name);
+
+                    dict.Add(prop.Name, d);
+                }
+
+                //object[] atts = prop.GetCustomAttributes(typeof(DisplayNameAttribute), true);
+                //IEnumerable<Attribute> atts1 = prop.GetCustomAttributes();
+                //if (atts1.Count() > 0)
+                //{
+                //    foreach(Attribute a in atts1)
+                //    {
+                //        if(a.GetType().Name == "DisplayNameAttribute")
+                //        {
+                //            var temp = a as DisplayNameAttribute;
+                //            var temp1 = temp.DisplayName;
+                //        }                        
+                //    }
+                //}
             }
 
             Console.WriteLine(Environment.NewLine);
@@ -188,7 +218,7 @@ namespace Shakat.UIConsoleApp
             }
         }
 
-        private static void CreateRazorPage(string model, string uiRoot, Dictionary<string, string> keyValuePairs)
+        private static void CreateRazorPage(string model, string uiRoot, Dictionary<string, Dictionary<string, string>> keyValuePairs)
         {
             try
             {

@@ -9,7 +9,7 @@ namespace Shakat.UIConsoleApp.Templates
 {
     public class RazorCsFileTemplate : ITemplate
     {
-        public StringBuilder GetTemplate(string model, Dictionary<string, string> keyValuePairs = null)
+        public StringBuilder GetTemplate(string model, Dictionary<string, Dictionary<string, string>> keyValuePairs = null)
         {
             string dtoObject = $"{model}Dto".FirstCharToLowerCase();
             
