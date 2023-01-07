@@ -9,7 +9,7 @@ namespace Shakat.UIConsoleApp.Templates
 {
     public class RazorComponentTemplate : ITemplate
     {
-        public StringBuilder GetTemplate(string model)
+        public StringBuilder GetTemplate(string model, Dictionary<string, string> keyValuePairs)
         {
             string dtoObject = $"{model}Dto".FirstCharToLowerCase();
 
@@ -38,25 +38,27 @@ else if (Action == ""Create"")
    <div>
         <dl class=""row"">
             
+            ", "{", "}", model, dtoObject);
+
+            // add the filepath of each tree to the class we're building
+            foreach (var props in keyValuePairs)
+            {
+                sourceBuilder.AppendFormat(@"
             <dt class = ""col-sm-2"">
-               Vehicle Origin
+               {4} - {5}
             </dt>
             <dd class = ""col-sm-12"">
                 <div class=""form-group"">
-                    <input @bind=""new{2}Object.Origin"" />
+                    <input @bind=""new{2}Object.{4}"" />
                     <span asp-validation-for=""Name"" class=""text-danger""></span>
                 </div>
             </dd>
-            <dt class = ""col-sm-2"">
-               Vehicle Type Id
-            </dt>
-            <dd class = ""col-sm-12"">
-                <div class=""form-group"">
-                    <input @bind=""new{2}Object.{2}Id"" />
-                    <span asp-validation-for=""Name"" class=""text-danger""></span>
-                </div>
-            </dd>
-            
+", "{", "}", model, dtoObject, props.Key, props.Value);
+
+                //sourceBuilder.AppendLine($@"Console.WriteLine(@""{props.Key} - {props.Value}"");");
+            }
+
+            sourceBuilder.AppendFormat(@"
         </dl>
         <button class=""btn btn-success"" @onclick=""AddItem"">Add</button>
     </div>
@@ -81,11 +83,11 @@ else if (Action == ""Edit"")
                 @editItem.{2}Id
             </dd>
             <dt class = ""col-sm-2"">
-               Vehicle Origin
+               Vehicle TrackingNumber
             </dt>
             <dd class = ""col-sm-12"">
                 <div class=""form-group"">
-                    <input @bind=""editItem.Origin"" />
+                    <input @bind=""editItem.TrackingNumber"" />
                     <span asp-validation-for=""Name"" class=""text-danger""></span>
                 </div>
             </dd>
@@ -126,10 +128,10 @@ else if (Action == ""Details"")
                 @editItem.{2}Id
             </dd>
             <dt class = ""col-sm-2"">
-               Vehicle Origin
+               Vehicle TrackingNumber
             </dt>
             <dd class = ""col-sm-10"">
-                @editItem.Origin
+                @editItem.TrackingNumber
             </dd>
              <dt class = ""col-sm-2"">
                Vehicle Type Id
@@ -164,7 +166,7 @@ else if (Action == ""Delete"")
                Vehicle Sub Type
             </dt>
             <dd class = ""col-sm-10"">
-                @editItem.Origin
+                @editItem.TrackingNumber
             </dd>
              <dt class = ""col-sm-2"">
                Vehicle Type Id
@@ -205,7 +207,7 @@ else
             {0}
                 <tr>
                     <td>@item.{2}Id</td>
-                    <td>@item.Origin</td>
+                    <td>@item.TrackingNumber</td>
                     <td>
                         <NavLink href=""@($""admin/{2}/Edit/{0}item.{2}Id{1}"")"">Edit</NavLink> | 
                         <NavLink href=""@($""admin/{2}/Details/{0}item.{2}Id{1}"")"">Details</NavLink> | 

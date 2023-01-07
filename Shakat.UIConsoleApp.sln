@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shakat.UI", "Shakat.UI\Shakat.UI.csproj", "{0173A9C6-6262-42A4-9C4D-AA312636D7AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shakat.UIConsoleApp", "Shakat.UIConsoleApp\Shakat.UIConsoleApp.csproj", "{EC648FD0-0425-4D6A-8C1D-AEA09D2AE9B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0173A9C6-6262-42A4-9C4D-AA312636D7AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0173A9C6-6262-42A4-9C4D-AA312636D7AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0173A9C6-6262-42A4-9C4D-AA312636D7AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0173A9C6-6262-42A4-9C4D-AA312636D7AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC648FD0-0425-4D6A-8C1D-AEA09D2AE9B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC648FD0-0425-4D6A-8C1D-AEA09D2AE9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC648FD0-0425-4D6A-8C1D-AEA09D2AE9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC648FD0-0425-4D6A-8C1D-AEA09D2AE9B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {472D1A4C-4D6F-4F96-85C5-C7E7E1180AE5}
+		SolutionGuid = {286423A2-C0F4-4A53-A863-5C19FC6163D7}
 	EndGlobalSection
 EndGlobal

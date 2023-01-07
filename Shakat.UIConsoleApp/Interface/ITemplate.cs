@@ -8,6 +8,6 @@ namespace Shakat.UIConsoleApp.Interface
 {
     public interface ITemplate
     {
-        StringBuilder GetTemplate(string model);
+        StringBuilder GetTemplate(string model, Dictionary<string, string> keyValuePairs = null);
     }
 }

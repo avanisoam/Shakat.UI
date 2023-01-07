@@ -21,17 +21,9 @@ else if (Action == "Create")
    <div>
         <dl class="row">
             
+            
             <dt class = "col-sm-2">
-               Vehicle Origin
-            </dt>
-            <dd class = "col-sm-12">
-                <div class="form-group">
-                    <input @bind="newShipmentObject.TrackingNumber" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-            </dd>
-            <dt class = "col-sm-2">
-               Vehicle Type Id
+               ShipmentId - Int32
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
@@ -39,7 +31,47 @@ else if (Action == "Create")
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
-            
+
+            <dt class = "col-sm-2">
+               OrderId - Int32
+            </dt>
+            <dd class = "col-sm-12">
+                <div class="form-group">
+                    <input @bind="newShipmentObject.OrderId" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </dd>
+
+            <dt class = "col-sm-2">
+               RouteId - Int32
+            </dt>
+            <dd class = "col-sm-12">
+                <div class="form-group">
+                    <input @bind="newShipmentObject.RouteId" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </dd>
+
+            <dt class = "col-sm-2">
+               TrackingNumber - String
+            </dt>
+            <dd class = "col-sm-12">
+                <div class="form-group">
+                    <input @bind="newShipmentObject.TrackingNumber" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </dd>
+
+            <dt class = "col-sm-2">
+               Status - String
+            </dt>
+            <dd class = "col-sm-12">
+                <div class="form-group">
+                    <input @bind="newShipmentObject.Status" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </dd>
+
         </dl>
         <button class="btn btn-success" @onclick="AddItem">Add</button>
     </div>
@@ -64,7 +96,7 @@ else if (Action == "Edit")
                 @editItem.ShipmentId
             </dd>
             <dt class = "col-sm-2">
-               Vehicle Origin
+               Vehicle TrackingNumber
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
@@ -109,7 +141,7 @@ else if (Action == "Details")
                 @editItem.ShipmentId
             </dd>
             <dt class = "col-sm-2">
-               Vehicle Origin
+               Vehicle TrackingNumber
             </dt>
             <dd class = "col-sm-10">
                 @editItem.TrackingNumber

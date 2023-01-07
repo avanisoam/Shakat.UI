@@ -1,6 +1,9 @@
 ﻿using Shakat.UIConsoleApp.Templates;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Shakat.UIConsoleApp
@@ -32,6 +35,21 @@ namespace Shakat.UIConsoleApp
 
             //var primaryKey = $"{model}Id";
 
+            string dtoFullPath = @"E:\2022\Shakat\Shakat.Shared\Shakat.Shared\bin\Debug\netstandard2.1\Shakat.Shared.dll";
+            Assembly MyDALL = Assembly.LoadFrom(dtoFullPath);
+            Type MyLoadClass = MyDALL.GetTypes().FirstOrDefault(t => t.Name == args[2]);
+            object obj = Activator.CreateInstance(MyLoadClass);
+
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+
+            foreach (var prop in obj.GetType().GetProperties())
+            {
+                Console.WriteLine("Name: {0} Type: {1} Value: {2}",
+                    prop.Name, prop.PropertyType.Name, prop.GetValue(obj, null));
+
+                dict.Add(prop.Name, prop.PropertyType.Name);
+            }
+
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine("1 : CreateInterfaceService");
             Console.WriteLine("2 : CreateService");
@@ -52,7 +70,57 @@ namespace Shakat.UIConsoleApp
             }
             else if (s == "3")
             {
-                CreateRazorPage(model, args[3]);
+                /*
+                
+                // https://stackoverflow.com/questions/57905333/how-to-get-class-type-from-cs-file-and-instantiate-it
+                var a = Assembly.GetExecutingAssembly()
+                    .GetTypes().Where(t => t.BaseType == typeof(InterfaceServiceTemplate));
+                
+                // https://learn.microsoft.com/en-us/dotnet/api/system.reflection.assembly.load?view=net-7.0
+                string longName = "system, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+                Assembly assem = Assembly.Load(longName);
+                if (assem == null)
+                    Console.WriteLine("Unable to load assembly...");
+                else
+                    Console.WriteLine(assem.FullName);
+
+                Assembly SampleAssembly;
+                //SampleAssembly = Assembly.LoadFrom(@"E:\2022\Shakat\Shakat.Shared\Shakat.Shared\bin\Debug\netstandard2.1\Shakat.Shared.dll");
+                SampleAssembly = Assembly.LoadFrom(@"Shakat.UIConsoleApp.dll");
+                // Obtain a reference to a method known to exist in assembly.
+                MethodInfo Method = SampleAssembly.GetTypes()[3].GetMethod("Main");
+                // Obtain a reference to the parameters collection of the MethodInfo instance.
+                ParameterInfo[] Params = Method.GetParameters();
+                // Display information about method parameters.
+                // Param = sParam1
+                //   Type = System.String
+                //   Position = 0
+                //   Optional=False
+                foreach (ParameterInfo Param in Params)
+                {
+                    Console.WriteLine("Param=" + Param.Name.ToString());
+                    Console.WriteLine("  Type=" + Param.ParameterType.ToString());
+                    Console.WriteLine("  Position=" + Param.Position.ToString());
+                    Console.WriteLine("  Optional=" + Param.IsOptional.ToString());
+                }
+
+                Assembly MyDALL = Assembly.LoadFrom(@"E:\2022\Shakat\Shakat.Shared\Shakat.Shared\bin\Debug\netstandard2.1\Shakat.Shared.dll"); // DALL is name of my dll
+                string name = model + "Dto";
+                Type[] test = MyDALL.GetTypes();
+                var test1 = test.FirstOrDefault(t => t.Name == name);
+                Type MyLoadClass = MyDALL.GetType(name); // LoadClass is my class
+                object obj = Activator.CreateInstance(test1);
+
+                //Foo foo = new Foo { A = 1, B = "abc" };
+                foreach (var prop in obj.GetType().GetProperties())
+                {
+                    Console.WriteLine("Name: {0} Type: {1} Value: {2}", 
+                        prop.Name, prop.PropertyType.Name, prop.GetValue(obj, null));
+                }
+
+                */                
+
+                CreateRazorPage(model, args[3], dict);
             }
             else if (s == "4")
             {
@@ -67,7 +135,7 @@ namespace Shakat.UIConsoleApp
                 CreateInterfaceService(model, args[3]);
                 CreateService(model, args[3]);
                 RegisterInProgram(model, args[3]);
-                CreateRazorPage(model, args[3]);
+                CreateRazorPage(model, args[3], dict);
                 CreateRazorCsFile(model, args[3]);
             }
 
@@ -120,13 +188,13 @@ namespace Shakat.UIConsoleApp
             }
         }
 
-        private static void CreateRazorPage(string model, string uiRoot)
+        private static void CreateRazorPage(string model, string uiRoot, Dictionary<string, string> keyValuePairs)
         {
             try
             {
                 RazorComponentTemplate template = new RazorComponentTemplate();
 
-                StringBuilder response = template.GetTemplate(model);
+                StringBuilder response = template.GetTemplate(model, keyValuePairs);
 
                 Console.WriteLine(response);
 
