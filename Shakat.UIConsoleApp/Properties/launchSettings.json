@@ -2,7 +2,7 @@
   "profiles": {
     "Shakat.UIConsoleApp": {
       "commandName": "Project",
-      "commandLineArgs": "Shakat.UI E:\\2022\\Shakat\\Shakat.Shared\\Shakat.Shared\\Models RouteInfoDto E:\\2022\\Shakat\\Shakat.UI\\Shakat.UI"
+      "commandLineArgs": "Shakat.UI E:\\2022\\Shakat\\Shakat.Shared\\Shakat.Shared\\Models ShipmentDto E:\\2022\\Shakat\\Shakat.UI\\Shakat.UI"
     }
   }
 }

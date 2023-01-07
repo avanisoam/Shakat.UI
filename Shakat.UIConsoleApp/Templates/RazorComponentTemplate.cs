@@ -52,7 +52,7 @@ else if (Action == ""Create"")
             </dt>
             <dd class = ""col-sm-12"">
                 <div class=""form-group"">
-                    <input @bind=""new{2}Object.VehicleTypeInfoId"" />
+                    <input @bind=""new{2}Object.{2}Id"" />
                     <span asp-validation-for=""Name"" class=""text-danger""></span>
                 </div>
             </dd>
@@ -201,7 +201,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in SubVehicles)
+            @foreach (var item in {3}s)
             {0}
                 <tr>
                     <td>@item.{2}Id</td>
@@ -222,7 +222,7 @@ else
 
     [Parameter]
     public int? Id {0} get; set; {1}
-{1}", "{ ", "}", model, dtoObject);
+{1}", "{", "}", model, dtoObject);
 
             return sourceBuilder;
         }

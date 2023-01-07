@@ -77,7 +77,7 @@ namespace Shakat.UI.Pages.Admin
     {1}
 {1}
 
-", "{ ", "}", model, dtoObject);
+", "{", "}", model, dtoObject);
 
             return sourceBuilder;
         }

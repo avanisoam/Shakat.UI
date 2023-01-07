@@ -80,6 +80,7 @@ namespace Shakat.UI.Services
         {0}
             try
             {0}
+                Console.WriteLine(""{4}"");
                 var response = await _httpClient.GetFromJsonAsync<IEnumerable<{2}Dto>>(""{4}"");
                 return response;
             {1}

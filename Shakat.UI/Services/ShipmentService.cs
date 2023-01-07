@@ -5,29 +5,29 @@ using System.Net.Http.Json;
 
 namespace Shakat.UI.Services
 {
-    public class RouteInfoService : IRouteInfoService
+    public class ShipmentService : IShipmentService
     {
         private readonly HttpClient _httpClient;
 
-        public RouteInfoService(HttpClient httpClient)
+        public ShipmentService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
-        public async Task<RouteInfoDto> Create(RouteInfoDto routeInfoDto)
+        public async Task<ShipmentDto> Create(ShipmentDto shipmentDto)
         {
             try
             {
-                var response = await _httpClient.PostAsJsonAsync<RouteInfoDto>("https://localhost:44395/api/RouteInfo", routeInfoDto);
+                var response = await _httpClient.PostAsJsonAsync<ShipmentDto>("https://localhost:44395/api/Shipment", shipmentDto);
 
                 if (response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        return default(RouteInfoDto);
+                        return default(ShipmentDto);
                     }
 
-                    return await response.Content.ReadFromJsonAsync<RouteInfoDto>();
+                    return await response.Content.ReadFromJsonAsync<ShipmentDto>();
                 }
                 else
                 {
@@ -42,12 +42,12 @@ namespace Shakat.UI.Services
             }
         }
 
-        public async Task<RouteInfoDto> Delete(int id)
+        public async Task<ShipmentDto> Delete(int id)
         {
             try
             {
-                var response = await _httpClient.DeleteAsync($"https://localhost:44395/api/RouteInfo/{id}");
-                return default(RouteInfoDto);
+                var response = await _httpClient.DeleteAsync($"https://localhost:44395/api/Shipment/{id}");
+                return default(ShipmentDto);
             }
             catch (Exception ex)
             {
@@ -56,12 +56,12 @@ namespace Shakat.UI.Services
             }
         }
 
-        public async Task<IEnumerable<RouteInfoDto>> GetAll()
+        public async Task<IEnumerable<ShipmentDto>> GetAll()
         {
             try
             {
-                Console.WriteLine("https://localhost:44395/api/RouteInfo");
-                var response = await _httpClient.GetFromJsonAsync<IEnumerable<RouteInfoDto>>("https://localhost:44395/api/RouteInfo");
+                Console.WriteLine("https://localhost:44395/api/Shipment");
+                var response = await _httpClient.GetFromJsonAsync<IEnumerable<ShipmentDto>>("https://localhost:44395/api/Shipment");
                 return response;
             }
             catch (Exception ex)
@@ -71,17 +71,17 @@ namespace Shakat.UI.Services
             }
         }
 
-        public Task<RouteInfoDto> GetById(int id)
+        public Task<ShipmentDto> GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<RouteInfoDto> Update(RouteInfoDto routeInfoDto)
+        public async Task<ShipmentDto> Update(ShipmentDto shipmentDto)
         {
             try
             {
-                var response = await _httpClient.PutAsJsonAsync($"https://localhost:44395/api/RouteInfo/{routeInfoDto.RouteInfoId}", routeInfoDto);
-                return routeInfoDto;
+                var response = await _httpClient.PutAsJsonAsync($"https://localhost:44395/api/Shipment/{shipmentDto.ShipmentId}", shipmentDto);
+                return shipmentDto;
             }
             catch (Exception ex)
             {

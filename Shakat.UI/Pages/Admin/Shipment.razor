@@ -1,13 +1,14 @@
-﻿@page "/admin/vehicletype/{Action?}/{Id:int?}"
 
-<h3>Admin - VehicleType</h3>
+@page "/admin/Shipment/{Action?}/{Id:int?}"
+
+<h3>Admin - Shipment</h3>
 
 @if (Id > 0)
 {
-   editItem = Vehicles.Single(i => i.VehicleTypeInfoId == Id);
+   editItem = shipmentDtos.Single(i => i.ShipmentId == Id);
 }
 
-@if (Vehicles == null)
+@if (shipmentDtos == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -21,23 +22,23 @@ else if (Action == "Create")
         <dl class="row">
             
             <dt class = "col-sm-2">
-               Vehicle Type
+               Vehicle Origin
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="newTypeObject.Type" />
+                    <input @bind="newShipmentObject.TrackingNumber" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
-            @*<dt class = "col-sm-2">
+            <dt class = "col-sm-2">
                Vehicle Type Id
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="newTypeObject.VehicleSubTypeInfo" />
+                    <input @bind="newShipmentObject.ShipmentId" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
-            </dd>*@
+            </dd>
             
         </dl>
         <button class="btn btn-success" @onclick="AddItem">Add</button>
@@ -45,7 +46,7 @@ else if (Action == "Create")
 
     <br />
      <div>
-            <NavLink href="admin/vehicletype">Back to List</NavLink>
+            <NavLink href="admin/Shipment">Back to List</NavLink>
     </div>
 }
 
@@ -60,26 +61,26 @@ else if (Action == "Edit")
                 Id
             </dt>
             <dd class = "col-sm-12">
-                @editItem.VehicleTypeInfoId
+                @editItem.ShipmentId
             </dd>
             <dt class = "col-sm-2">
-               Vehicle Type
+               Vehicle Origin
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="editItem.Type" />
+                    <input @bind="editItem.TrackingNumber" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
-            @* <dt class = "col-sm-2">
+             <dt class = "col-sm-2">
                Vehicle Type Id
             </dt>
             <dd class = "col-sm-12">
                  <div class="form-group">
-                    <input @bind="editItem.VehicleSubTypeInfo" />
+                    <input @bind="editItem.ShipmentId" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
-            </dd>*@
+            </dd>
          </dl>
         <div class="form-group">
             <button class="btn btn-primary" @onclick="UpdateItem">
@@ -90,7 +91,7 @@ else if (Action == "Edit")
 
     <br />
      <div>
-            <NavLink href="admin/vehicletype">Back to List</NavLink>
+            <NavLink href="admin/Shipment">Back to List</NavLink>
     </div>
 }
 
@@ -105,24 +106,24 @@ else if (Action == "Details")
                 Id
             </dt>
             <dd class = "col-sm-10">
-                @editItem.VehicleTypeInfoId
+                @editItem.ShipmentId
             </dd>
             <dt class = "col-sm-2">
-               Vehicle Type
+               Vehicle Origin
             </dt>
             <dd class = "col-sm-10">
-                @editItem.Type
+                @editItem.TrackingNumber
             </dd>
-            @* <dt class = "col-sm-2">
+             <dt class = "col-sm-2">
                Vehicle Type Id
             </dt>
             <dd class = "col-sm-10">
-                @editItem.VehicleTypeInfoId
-            </dd>*@
+                @editItem.ShipmentId
+            </dd>
         </dl>
     </div>
      <div>
-            <NavLink href="admin/vehicletype">Back to List</NavLink>
+            <NavLink href="admin/Shipment">Back to List</NavLink>
     </div>
 }
 
@@ -140,39 +141,39 @@ else if (Action == "Delete")
                 Id
             </dt>
             <dd class = "col-sm-10">
-                @editItem.VehicleTypeInfoId
+                @editItem.ShipmentId
             </dd>
             <dt class = "col-sm-2">
                Vehicle Sub Type
             </dt>
             <dd class = "col-sm-10">
-                @editItem.Type
+                @editItem.TrackingNumber
             </dd>
-            @* <dt class = "col-sm-2">
+             <dt class = "col-sm-2">
                Vehicle Type Id
             </dt>
             <dd class = "col-sm-10">
-                @editItem.VehicleSubTypes
-            </dd>*@
+                @editItem.ShipmentId
+            </dd>
         </dl>
      </div>
     <div>
          <button class="btn btn-danger" 
-          @onclick="@(async () => await DeleteItem(editItem.VehicleTypeInfoId))">
+          @onclick="@(async () => await DeleteItem(editItem.ShipmentId))">
             Delete
           </button>
      </div>
 
     <br />
      <div>
-            <NavLink href="admin/vehicletype">Back to List</NavLink>
+            <NavLink href="admin/Shipment">Back to List</NavLink>
     </div>
 }
 
 else
 {
 <p>
-        <NavLink href="admin/vehicletype/Create">Create New</NavLink>
+        <NavLink href="admin/Shipment/Create">Create New</NavLink>
     </p>
     <table class="table">
         <thead>
@@ -183,15 +184,15 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Vehicles)
+            @foreach (var item in shipmentDtos)
             {
                 <tr>
-                    <td>@item.VehicleTypeInfoId</td>
-                    <td>@item.Type</td>
+                    <td>@item.ShipmentId</td>
+                    <td>@item.TrackingNumber</td>
                     <td>
-                        <NavLink href="@($"admin/vehicletype/Edit/{item.VehicleTypeInfoId}")">Edit</NavLink> | 
-                        <NavLink href="@($"admin/vehicletype/Details/{item.VehicleTypeInfoId}")">Details</NavLink> | 
-                        <NavLink href="@($"admin/vehicletype/Delete/{item.VehicleTypeInfoId}")">Delete</NavLink>                        
+                        <NavLink href="@($"admin/Shipment/Edit/{item.ShipmentId}")">Edit</NavLink> | 
+                        <NavLink href="@($"admin/Shipment/Details/{item.ShipmentId}")">Details</NavLink> | 
+                        <NavLink href="@($"admin/Shipment/Delete/{item.ShipmentId}")">Delete</NavLink>                        
                     </td>
                 </tr>
             }

@@ -38,7 +38,7 @@ namespace Shakat.UIConsoleApp
             Console.WriteLine("3 : CreateRazorPage");
             Console.WriteLine("4 : CreateRazorCsFile");
             Console.WriteLine("5 : RegisterInProgram");
-            Console.WriteLine("9 : CreateUI");
+            Console.WriteLine("6 : CreateUI");
 
             String s = Console.ReadLine();
 
@@ -56,6 +56,18 @@ namespace Shakat.UIConsoleApp
             }
             else if (s == "4")
             {
+                CreateRazorCsFile(model, args[3]);
+            }
+            else if (s == "5")
+            {
+                RegisterInProgram(model, args[3]);
+            }
+            else if (s == "6")
+            {
+                CreateInterfaceService(model, args[3]);
+                CreateService(model, args[3]);
+                RegisterInProgram(model, args[3]);
+                CreateRazorPage(model, args[3]);
                 CreateRazorCsFile(model, args[3]);
             }
 
@@ -153,7 +165,14 @@ namespace Shakat.UIConsoleApp
             }
         }
 
-            public static string? FirstCharToLowerCase(this string? str)
+        private static void RegisterInProgram(string model, string uiRoot)
+        {
+            string text = File.ReadAllText($"{uiRoot}/Program.cs");
+            text = text.Replace("#endregion DI End", $"builder.Services.AddScoped<I{model}Service, {model}Service>();{Environment.NewLine}#endregion DI End");
+            File.WriteAllText($"{uiRoot}/Program.cs", text);
+        }
+
+        public static string? FirstCharToLowerCase(this string? str)
         {
             if (!string.IsNullOrEmpty(str) && char.IsUpper(str[0]))
                 return str.Length == 1 ? char.ToLower(str[0]).ToString() : char.ToLower(str[0]) + str[1..];
