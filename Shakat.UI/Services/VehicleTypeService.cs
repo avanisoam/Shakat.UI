@@ -4,28 +4,28 @@ using System.Net.Http.Json;
 
 namespace Shakat.UI.Services
 {
-    public class VehicleTypeService : IVehicleTypeService
+    public class VehicleTypeInfoService : IVehicleTypeInfoService
     {
         private readonly HttpClient _httpClient;
 
-        public VehicleTypeService(HttpClient httpClient)
+        public VehicleTypeInfoService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
-        public async Task<VehicleTypeDto> Create(VehicleTypeDto vehicleTypeDto)
+        public async Task<VehicleTypeInfoDto> Create(VehicleTypeInfoDto vehicleTypeInfoDto)
         {
             try
             {
-                var response = await _httpClient.PostAsJsonAsync<VehicleTypeDto>("https://localhost:44395/api/VehicleTypeInfo", vehicleTypeDto);
+                var response = await _httpClient.PostAsJsonAsync<VehicleTypeInfoDto>("https://localhost:44395/api/VehicleTypeInfo", vehicleTypeInfoDto);
 
                 if (response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        return default(VehicleTypeDto);
+                        return default(VehicleTypeInfoDto);
                     }
 
-                    return await response.Content.ReadFromJsonAsync<VehicleTypeDto>();
+                    return await response.Content.ReadFromJsonAsync<VehicleTypeInfoDto>();
 
                 }
                 else
@@ -41,13 +41,13 @@ namespace Shakat.UI.Services
             }
         }
 
-        public async Task<VehicleTypeDto> Delete(int id)
+        public async Task<VehicleTypeInfoDto> Delete(int id)
         {
             try
             {
                 var response = await _httpClient.DeleteAsync($"https://localhost:44395/api/VehicleTypeInfo/{id}");
 
-                return default(VehicleTypeDto);
+                return default(VehicleTypeInfoDto);
             }
             catch (Exception)
             {
@@ -56,11 +56,11 @@ namespace Shakat.UI.Services
             }
         }
 
-        public async Task<IEnumerable<VehicleTypeDto>> GetAll()
+        public async Task<IEnumerable<VehicleTypeInfoDto>> GetAll()
         {
             try
             {
-                var response = await _httpClient.GetFromJsonAsync<IEnumerable<VehicleTypeDto>>("https://localhost:44395/api/VehicleTypeInfo");
+                var response = await _httpClient.GetFromJsonAsync<IEnumerable<VehicleTypeInfoDto>>("https://localhost:44395/api/VehicleTypeInfo");
                 return response;
             }
             catch (Exception)
@@ -70,19 +70,19 @@ namespace Shakat.UI.Services
             }
         }
 
-        public Task<VehicleTypeDto> GetById(int id)
+        public Task<VehicleTypeInfoDto> GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<VehicleTypeDto> UpdateSubType(VehicleTypeDto vehicleTypeDto)
+        public async Task<VehicleTypeInfoDto> UpdateSubType(VehicleTypeInfoDto vehicleTypeInfoDto)
         {
             try
             {
 
-                var response = await _httpClient.PutAsJsonAsync($"https://localhost:44395/api/VehicleTypeInfo/{vehicleTypeDto.VehicleTypeInfoId}", vehicleTypeDto);
+                var response = await _httpClient.PutAsJsonAsync($"https://localhost:44395/api/VehicleTypeInfo/{vehicleTypeInfoDto.VehicleTypeInfoId}", vehicleTypeInfoDto);
 
-                return vehicleTypeDto;
+                return vehicleTypeInfoDto;
 
             }
             catch (Exception ex)

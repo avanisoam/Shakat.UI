@@ -7,16 +7,16 @@ namespace Shakat.UI.Pages.Admin
     public partial class VehicleSubType
     {
         [Inject]
-        public IVehicleSubTypeService VehicleSubTypeService { get; set; }
+        public IVehicleSubTypeInfoService VehicleSubTypeService { get; set; }
 
         [Inject]
         NavigationManager MyNavigationManager { get; set; }
 
-        public IEnumerable<VehicleSubTypeDto> SubVehicles { get; set; } = new List<VehicleSubTypeDto>();
+        public IEnumerable<VehicleSubTypeInfoDto> SubVehicles { get; set; } = new List<VehicleSubTypeInfoDto>();
 
-        public VehicleSubTypeDto? editItem { get; set; }
+        public VehicleSubTypeInfoDto? editItem { get; set; }
 
-        public VehicleSubTypeDto newSubTypeObject { get; set; } = new();
+        public VehicleSubTypeInfoDto newSubTypeObject { get; set; } = new();
 
         protected override async Task OnInitializedAsync()
         {

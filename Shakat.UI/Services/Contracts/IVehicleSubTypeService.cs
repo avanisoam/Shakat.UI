@@ -2,14 +2,14 @@
 
 namespace Shakat.UI.Services.Contracts
 {
-    public interface IVehicleSubTypeService
+    public interface IVehicleSubTypeInfoService
     {
-        Task<IEnumerable<VehicleSubTypeDto>> GetAll();
-        Task<VehicleSubTypeDto> GetById(int id);
-        Task<VehicleSubTypeDto> Create(VehicleSubTypeDto vehicleSubTypeDto);
+        Task<IEnumerable<VehicleSubTypeInfoDto>> GetAll();
+        Task<VehicleSubTypeInfoDto> GetById(int id);
+        Task<VehicleSubTypeInfoDto> Create(VehicleSubTypeInfoDto vehicleSubTypeInfoDto);
 
-        Task<VehicleSubTypeDto> UpdateSubType(VehicleSubTypeDto vehicleSubTypeDto);
+        Task<VehicleSubTypeInfoDto> UpdateSubType(VehicleSubTypeInfoDto vehicleSubTypeInfoDto);
 
-        Task<VehicleSubTypeDto> Delete(int id);
+        Task<VehicleSubTypeInfoDto> Delete(int id);
     }
 }
