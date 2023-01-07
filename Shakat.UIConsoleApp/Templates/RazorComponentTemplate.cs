@@ -76,30 +76,25 @@ else if (Action == ""Edit"")
 
     <div>
         <dl class=""row"">
+", "{", "}", model, dtoObject);
+
+            foreach (var props in keyValuePairs)
+            {
+                sourceBuilder.AppendFormat(@"
             <dt class = ""col-sm-2"">
-                Id
-            </dt>
-            <dd class = ""col-sm-12"">
-                @editItem.{2}Id
-            </dd>
-            <dt class = ""col-sm-2"">
-               Vehicle TrackingNumber
-            </dt>
-            <dd class = ""col-sm-12"">
-                <div class=""form-group"">
-                    <input @bind=""editItem.TrackingNumber"" />
-                    <span asp-validation-for=""Name"" class=""text-danger""></span>
-                </div>
-            </dd>
-             <dt class = ""col-sm-2"">
-               Vehicle Type Id
+               {4} - {5}
             </dt>
             <dd class = ""col-sm-12"">
                  <div class=""form-group"">
-                    <input @bind=""editItem.{2}Id"" />
+                    <input @bind=""editItem.{4}"" />
                     <span asp-validation-for=""Name"" class=""text-danger""></span>
                 </div>
             </dd>
+", "{", "}", model, dtoObject, props.Key, props.Value);
+
+            }
+
+            sourceBuilder.AppendFormat(@"
          </dl>
         <div class=""form-group"">
             <button class=""btn btn-primary"" @onclick=""UpdateItem"">
@@ -121,24 +116,22 @@ else if (Action == ""Details"")
     <br />
     <div>
          <dl class=""row"">
+", "{", "}", model, dtoObject);
+
+            foreach (var props in keyValuePairs)
+            {
+                sourceBuilder.AppendFormat(@"
             <dt class = ""col-sm-2"">
-                Id
+               {4} - {5}
             </dt>
             <dd class = ""col-sm-10"">
-                @editItem.{2}Id
+                @editItem.{4}
             </dd>
-            <dt class = ""col-sm-2"">
-               Vehicle TrackingNumber
-            </dt>
-            <dd class = ""col-sm-10"">
-                @editItem.TrackingNumber
-            </dd>
-             <dt class = ""col-sm-2"">
-               Vehicle Type Id
-            </dt>
-            <dd class = ""col-sm-10"">
-                @editItem.{2}Id
-            </dd>
+", "{", "}", model, dtoObject, props.Key, props.Value);
+
+            }
+
+            sourceBuilder.AppendFormat(@"
         </dl>
     </div>
      <div>
@@ -156,24 +149,22 @@ else if (Action == ""Delete"")
      <div>
          <hr />
           <dl class=""row"">
+", "{", "}", model, dtoObject);
+
+            foreach (var props in keyValuePairs)
+            {
+                sourceBuilder.AppendFormat(@"
             <dt class = ""col-sm-2"">
-                Id
+               {4} - {5}
             </dt>
             <dd class = ""col-sm-10"">
-                @editItem.{2}Id
+                @editItem.{4}
             </dd>
-            <dt class = ""col-sm-2"">
-               Vehicle Sub Type
-            </dt>
-            <dd class = ""col-sm-10"">
-                @editItem.TrackingNumber
-            </dd>
-             <dt class = ""col-sm-2"">
-               Vehicle Type Id
-            </dt>
-            <dd class = ""col-sm-10"">
-                @editItem.{2}Id
-            </dd>
+", "{", "}", model, dtoObject, props.Key, props.Value);
+
+            }
+
+            sourceBuilder.AppendFormat(@"
         </dl>
      </div>
     <div>
