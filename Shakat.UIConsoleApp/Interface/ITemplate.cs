@@ -8,6 +8,6 @@ namespace Shakat.UIConsoleApp.Interface
 {
     public interface ITemplate
     {
-        StringBuilder GetTemplate(string dto, string service = "", string serviceUrl = "", string primaryKey = "");
+        StringBuilder GetTemplate(string model);
     }
 }

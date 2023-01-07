@@ -9,7 +9,7 @@ namespace Shakat.UIConsoleApp
     {
         public static int Main(string[] args)
         {
-            if (args.Length < 5)
+            if (args.Length < 4)
             {
                 Console.WriteLine("Invalid Input... Please try  again");
                 return -1;
@@ -19,9 +19,18 @@ namespace Shakat.UIConsoleApp
             Console.WriteLine("Shared Root: {0}", args[1]);
             Console.WriteLine("DTO Name: {0}", args[2]);
             Console.WriteLine("UI Root: {0}", args[3]);
-            Console.WriteLine("Service Name: {0}", args[4]);
-            Console.WriteLine("Service URL: {0}", args[5]);
-            Console.WriteLine("Primary Key: {0}", args[6]);
+            //Console.WriteLine("Service Name: {0}", args[4]);
+            //Console.WriteLine("Service URL: {0}", args[5]);
+            //Console.WriteLine("Primary Key: {0}", args[6]);
+
+            var model = args[2].Trim();
+            model = model.Substring(0, model.Length-3);
+
+            Console.WriteLine($"Derived Model From Dto: {model}");
+
+            //var url = $"https://localhost:44395/api/{model}";
+
+            //var primaryKey = $"{model}Id";
 
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine("1 : CreateInterfaceService");
@@ -35,27 +44,35 @@ namespace Shakat.UIConsoleApp
 
             if (s == "1")
             {
-                CreateInterfaceService(args[2], args[3], args[4]);
+                CreateInterfaceService(model, args[3]);
             }
             else if (s == "2")
             {
-                CreateService(args[2], args[3], args[4],args[5], args[6]);
+                CreateService(model,args[3]);
+            }
+            else if (s == "3")
+            {
+                CreateRazorPage(model, args[3]);
+            }
+            else if (s == "4")
+            {
+                CreateRazorCsFile(model, args[3]);
             }
 
             return 1;
         }
 
-        private static void CreateInterfaceService(string dto, string uiRoot, string service)
+        private static void CreateInterfaceService(string model, string uiRoot)
         {
             try
             {
                 InterfaceServiceTemplate template = new InterfaceServiceTemplate();
 
-                StringBuilder response = template.GetTemplate(dto, service);
+                StringBuilder response = template.GetTemplate(model);
 
                 Console.WriteLine(response);
 
-                StreamWriter sw = new StreamWriter($"{uiRoot}/Services/Contracts/I{service}.cs");
+                StreamWriter sw = new StreamWriter($"{uiRoot}/Services/Contracts/I{model}Service.cs");
 
                 sw.Write(response);
 
@@ -68,17 +85,17 @@ namespace Shakat.UIConsoleApp
             }
         }
 
-        private static void CreateService(string dto, string uiRoot, string service, string serviceUrl, string primaryKey)
+        private static void CreateService(string model, string uiRoot)
         {
             try
             {
                 ServiceTemplate template = new ServiceTemplate();
 
-                StringBuilder response = template.GetTemplate(dto, service, serviceUrl, primaryKey);
+                StringBuilder response = template.GetTemplate(model);
 
                 Console.WriteLine(response);
 
-                StreamWriter sw = new StreamWriter($"{uiRoot}/Services/{service}.cs");
+                StreamWriter sw = new StreamWriter($"{uiRoot}/Services/{model}Service.cs");
 
                 sw.Write(response);
 
@@ -87,6 +104,51 @@ namespace Shakat.UIConsoleApp
             catch (Exception e)
             {
 
+                Console.WriteLine("Exception: " + e.Message);
+            }
+        }
+
+        private static void CreateRazorPage(string model, string uiRoot)
+        {
+            try
+            {
+                RazorComponentTemplate template = new RazorComponentTemplate();
+
+                StringBuilder response = template.GetTemplate(model);
+
+                Console.WriteLine(response);
+
+                StreamWriter sw = new StreamWriter($"{uiRoot}/Pages/Admin/{model}.razor");
+
+                sw.Write(response);
+
+                sw.Close();
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine("Exception: " + e.Message);
+            }
+        }
+
+        private static void CreateRazorCsFile(string model, string uiRoot)
+        {
+            try
+            {
+                RazorCsFileTemplate template = new RazorCsFileTemplate();
+
+                StringBuilder response = template.GetTemplate(model);
+
+                Console.WriteLine(response);
+
+                StreamWriter sw = new StreamWriter($"{uiRoot}/Pages/Admin/{model}.razor.cs");
+
+                sw.Write(response);
+
+                sw.Close();
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine("Exception: " + e.Message);
             }
         }

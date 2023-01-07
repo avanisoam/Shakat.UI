@@ -28,7 +28,6 @@ namespace Shakat.UI.Services
                     }
 
                     return await response.Content.ReadFromJsonAsync<RouteInfoDto>();
-
                 }
                 else
                 {
@@ -36,9 +35,9 @@ namespace Shakat.UI.Services
                     throw new Exception($"Http status:{response.StatusCode} Message -{message}");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
                 throw;
             }
         }
@@ -48,12 +47,11 @@ namespace Shakat.UI.Services
             try
             {
                 var response = await _httpClient.DeleteAsync($"https://localhost:44395/api/RouteInfo/{id}");
-
                 return default(RouteInfoDto);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
                 throw;
             }
         }
@@ -65,9 +63,9 @@ namespace Shakat.UI.Services
                 var response = await _httpClient.GetFromJsonAsync<IEnumerable<RouteInfoDto>>("https://localhost:44395/api/RouteInfo");
                 return response;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
                 throw;
             }
         }
@@ -81,15 +79,12 @@ namespace Shakat.UI.Services
         {
             try
             {
-
                 var response = await _httpClient.PutAsJsonAsync($"https://localhost:44395/api/RouteInfo/{routeInfoDto.RouteInfoId}", routeInfoDto);
-
                 return routeInfoDto;
-
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
                 throw;
             }
         }

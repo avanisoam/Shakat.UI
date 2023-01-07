@@ -9,9 +9,9 @@ namespace Shakat.UIConsoleApp.Templates
 {
     public class InterfaceServiceTemplate : ITemplate
     {
-        public StringBuilder GetTemplate(string dto, string service, string serviceUrl = "", string primaryKey = "")
+        public StringBuilder GetTemplate(string model)
         {
-            string dtoObject = dto.FirstCharToLowerCase();
+            string dtoObject = $"{model}Dto".FirstCharToLowerCase();
 
             StringBuilder sourceBuilder = new StringBuilder(@"");
             
@@ -20,18 +20,17 @@ using Shakat.Shared.Models;
 
 namespace Shakat.UI.Services.Contracts
 {0}
-    public interface I{3}
+    public interface I{2}Service
     {0}
-        Task<IEnumerable<{2}>> GetAll();
-        Task<{2}> GetById(int id);
-        Task<{2}> Create({2} {4});
+        Task<IEnumerable<{2}Dto>> GetAll();
 
-        Task<{2}> Update({2} {4});
-
-        Task<{2}> Delete(int id);
+        Task<{2}Dto> GetById(int id);
+        Task<{2}Dto> Create({2}Dto {3});
+        Task<{2}Dto> Update({2}Dto {3});
+        Task<{2}Dto> Delete(int id);
     {1}
 {1}
- ", "{", "}", dto, service, dtoObject);
+ ", "{", "}", model, dtoObject);
 
             return sourceBuilder;
         }

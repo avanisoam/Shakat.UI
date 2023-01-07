@@ -9,9 +9,12 @@ namespace Shakat.UIConsoleApp.Templates
 {
     public class ServiceTemplate : ITemplate
     {
-        public StringBuilder GetTemplate(string dto, string service = "", string serviceUrl = "", string primaryKey = "")
+        public StringBuilder GetTemplate(string model)
         {
-            string dtoObject = dto.FirstCharToLowerCase();
+            string dtoObject = $"{model}Dto".FirstCharToLowerCase();
+            var url = $"https://localhost:44395/api/{model}";
+
+            var primaryKey = $"{model}Id";
 
             StringBuilder sourceBuilder = new StringBuilder(@"");
 
@@ -22,30 +25,29 @@ using System.Net.Http.Json;
 
 namespace Shakat.UI.Services
 {0}
-    public class {3} : I{3}
+    public class {2}Service : I{2}Service
     {0}
         private readonly HttpClient _httpClient;
 
-        public {3}(HttpClient httpClient)
+        public {2}Service(HttpClient httpClient)
         {0}
             _httpClient = httpClient;
         {1}
 
-        public async Task<{2}> Create({2} {4})
+        public async Task<{2}Dto> Create({2}Dto {3})
         {0}
             try
             {0}
-                var response = await _httpClient.PostAsJsonAsync<{2}>(""{5}"", {4});
+                var response = await _httpClient.PostAsJsonAsync<{2}Dto>(""{4}"", {3});
 
                 if (response.IsSuccessStatusCode)
                 {0}
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {0}
-                        return default({2});
+                        return default({2}Dto);
                     {1}
 
-                    return await response.Content.ReadFromJsonAsync<{2}>();
-
+                    return await response.Content.ReadFromJsonAsync<{2}Dto>();
                 {1}
                 else
                 {0}
@@ -53,66 +55,62 @@ namespace Shakat.UI.Services
                     throw new Exception($""Http status:{0}response.StatusCode{1} Message -{0}message{1}"");
                 {1}
             {1}
-            catch (Exception)
+            catch (Exception ex)
             {0}
-
+                Console.WriteLine(ex.Message);
                 throw;
             {1}
         {1}
 
-        public async Task<{2}> Delete(int id)
+        public async Task<{2}Dto> Delete(int id)
         {0}
             try
             {0}
-                var response = await _httpClient.DeleteAsync($""{5}/{0}id{1}"");
-
-                return default({2});
+                var response = await _httpClient.DeleteAsync($""{4}/{0}id{1}"");
+                return default({2}Dto);
             {1}
-            catch (Exception)
+            catch (Exception ex)
             {0}
-
+                Console.WriteLine(ex.Message);
                 throw;
             {1}
         {1}
 
-        public async Task<IEnumerable<{2}>> GetAll()
+        public async Task<IEnumerable<{2}Dto>> GetAll()
         {0}
             try
             {0}
-                var response = await _httpClient.GetFromJsonAsync<IEnumerable<{2}>>(""{5}"");
+                var response = await _httpClient.GetFromJsonAsync<IEnumerable<{2}Dto>>(""{4}"");
                 return response;
             {1}
-            catch (Exception)
+            catch (Exception ex)
             {0}
-
+                Console.WriteLine(ex.Message);
                 throw;
             {1}
         {1}
 
-        public Task<{2}> GetById(int id)
+        public Task<{2}Dto> GetById(int id)
         {0}
             throw new NotImplementedException();
         {1}
 
-        public async Task<{2}> Update({2} {4})
+        public async Task<{2}Dto> Update({2}Dto {3})
         {0}
             try
             {0}
-
-                var response = await _httpClient.PutAsJsonAsync($""{5}/{0}{4}.{6}{1}"", {4});
-
-                return {4};
-
+                var response = await _httpClient.PutAsJsonAsync($""{4}/{0}{3}.{2}Id{1}"", {3});
+                return {3};
             {1}
             catch (Exception ex)
             {0}
-
+                Console.WriteLine(ex.Message);
                 throw;
             {1}
         {1}
     {1}
 {1}
-", "{", "}", dto, service, dtoObject, serviceUrl, primaryKey);
+", "{", "}", model, dtoObject, url, primaryKey);
 
             return sourceBuilder;
         }
