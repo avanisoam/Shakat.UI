@@ -25,6 +25,7 @@ builder.Services.AddScoped<IRouteInfoService, RouteInfoService>();
 builder.Services.AddScoped<IRouteInfoService, RouteInfoService>();
  builder.Services.AddScoped<IRouteInfoService, RouteInfoService>();
 builder.Services.AddScoped<IShipmentService, ShipmentService>();
+builder.Services.AddScoped<IDummyService, DummyService>();
 #endregion DI End
 
 await builder.Build().RunAsync();

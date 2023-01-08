@@ -12,12 +12,16 @@
 	  
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.2" PrivateAssets="all" />
-    <PackageReference Include="Shakat.Shared" Version="2023.1.7.1136" />
+    <!--<PackageReference Include="Shakat.Shared" Version="2023.1.7.1136" />-->
     
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Pages\Admin\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shakat.Shared\Shakat.Shared\Shakat.Shared.csproj" />
   </ItemGroup>
 
 </Project>
