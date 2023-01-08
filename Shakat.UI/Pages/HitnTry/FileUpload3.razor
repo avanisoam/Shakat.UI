@@ -103,7 +103,7 @@
 
         if (upload)
         {
-            var response = await Http.PostAsync("/Filesave", content);
+            var response = await Http.PostAsync("https://localhost:44395/Filesave", content);
 
             var newUploadResults = await response.Content
                 .ReadFromJsonAsync<IList<UploadResult>>();
