@@ -16,6 +16,7 @@
 else if (Action == "Create")
 {
     <h1>Create</h1>
+    <EditForm Model="@newDummyObject">
     <hr />
 
    <div>
@@ -27,17 +28,17 @@ else if (Action == "Create")
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="newDummyObject.DummyId" />
+                    <InputNumber @bind-Value="newDummyObject.DummyId" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
 
-            <dt class = "col-sm-2">
+           <dt class = "col-sm-2">
                Text Identifier - String
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="newDummyObject.Text_Identifier" />
+                    <InputText @bind-Value="newDummyObject.Text_Identifier" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
@@ -47,27 +48,47 @@ else if (Action == "Create")
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="newDummyObject.Textarea_Description" />
+                    <InputTextArea @bind-Value="newDummyObject.Textarea_Description" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
 
-            <dt class = "col-sm-2">
+             <dt class = "col-sm-2">
                Select Classification - String
             </dt>
+            @*if( dummyDtos == null)  
+                        {  
+                        <p>  
+                            <em>Loading ...</em>  
+                        </p>  
+                        }  
+            else  
+            {*@
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="newDummyObject.Select_Classification" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <InputSelect @bind-Value="newDummyObject.Select_Classification">
+                        <option value="">Select classification ...</option>
+                        <option value="Exploration">Exploration</option>
+                        <option value="Diplomacy">Diplomacy</option>
+                        <option value="Defense">Defense</option>
+                    </InputSelect>
+
+                    @*<Select class="form-select" @onchange="OnValueChanged" title="Text_Identifier is required ">  
+                            <option value="Select" selected disabled="disabled">(Choose Text_Identifier)</option>  
+                        @foreach (var dummy in dummyDtos)  
+                        {  
+                            <option value="@dummy.DummyId"> @dummy.Text_Identifier</option>  
+                        }  
+                        </Select> *@ 
                 </div>
             </dd>
-
+            @*}*@
             <dt class = "col-sm-2">
                Number Maximum Accomodation - Int32
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="newDummyObject.Number_Max_Accomodation" />
+                    <InputNumber @bind-Value="newDummyObject.Number_Max_Accomodation" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
@@ -77,17 +98,17 @@ else if (Action == "Create")
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="newDummyObject.Checkbox_IsValidatedDesign" />
+                    <InputCheckbox @bind-Value="newDummyObject.Checkbox_IsValidatedDesign" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
 
-            <dt class = "col-sm-2">
+             <dt class = "col-sm-2">
                Date Production Date - DateTime
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="newDummyObject.Date_ProductionDate" />
+                    <InputDate @bind-Value="newDummyObject.Date_ProductionDate" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
@@ -97,7 +118,7 @@ else if (Action == "Create")
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="newDummyObject.RadioGroup_Manufacturer" />
+                    <InputText @bind-Value="newDummyObject.RadioGroup_Manufacturer" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
@@ -107,17 +128,18 @@ else if (Action == "Create")
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="newDummyObject.Uploaded" />
+                    <InputSelect @bind-Value="newDummyObject.Uploaded" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
 
-            <dt class = "col-sm-2">
+
+             <dt class = "col-sm-2">
                File Name - String
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="newDummyObject.FileName" />
+                    <InputText @bind-Value="newDummyObject.FileName" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
@@ -127,7 +149,7 @@ else if (Action == "Create")
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="newDummyObject.StoredFileName" />
+                    <InputText @bind-Value="newDummyObject.StoredFileName" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
@@ -137,19 +159,21 @@ else if (Action == "Create")
             </dt>
             <dd class = "col-sm-12">
                 <div class="form-group">
-                    <input @bind="newDummyObject.ErrorCode" />
+                    <InputNumber @bind-Value="newDummyObject.ErrorCode" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
 
         </dl>
         <button class="btn btn-success" @onclick="AddItem">Add</button>
-    </div>
+   </div>
 
-    <br />
-     <div>
+       <br />
+         <div>
             <NavLink href="admin/Dummy">Back to List</NavLink>
-    </div>
+         </div>
+
+  </EditForm>
 }
 
 else if (Action == "Edit")

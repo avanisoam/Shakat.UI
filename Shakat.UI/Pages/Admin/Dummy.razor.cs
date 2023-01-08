@@ -19,6 +19,10 @@ namespace Shakat.UI.Pages.Admin
 
         public DummyDto newDummyObject { get; set; } = new();
 
+        public string Value { get; set; }
+
+        public EventCallback<string> ValueChanged { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             dummyDtos = await DummyService.GetAll();
@@ -55,6 +59,15 @@ namespace Shakat.UI.Pages.Admin
             dummyDtos = await DummyService.GetAll();
 
             MyNavigationManager.NavigateTo("admin/dummyDto");
+        }
+
+        public Task OnValueChanged(ChangeEventArgs e)
+        {
+            Value = e.Value.ToString();
+
+            newDummyObject.DummyId = Convert.ToInt32(Value);
+
+            return ValueChanged.InvokeAsync(Value);
         }
 
     }
