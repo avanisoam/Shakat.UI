@@ -1,4 +1,5 @@
 using Blazored.Modal;
+using DaiNandani.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Shakat.UI;
@@ -26,6 +27,8 @@ builder.Services.AddScoped<IRouteInfoService, RouteInfoService>();
  builder.Services.AddScoped<IRouteInfoService, RouteInfoService>();
 builder.Services.AddScoped<IShipmentService, ShipmentService>();
 builder.Services.AddScoped<IDummyService, DummyService>();
+builder.Services.AddScoped<CategoriesService>();
+builder.Services.AddScoped<TasksService>();
 #endregion DI End
 
 await builder.Build().RunAsync();
