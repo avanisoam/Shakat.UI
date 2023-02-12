@@ -75,8 +75,12 @@ else
 
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">            
 			<div class="col d-flex align-items-start">
-				<select name="materialtype" id="cf_materialtype" class="form-select" @onchange="OnValueChanged" aria-label="Default select example">
-					<option value="">Material Type </option>
+					<InputSelect name="materialtype" @bind-Value="MaterialTypeInfoId" class="form-control">
+						@foreach(var item in MaterialTypeInfos)
+						{
+							<option value="@item.MaterialTypeInfoId">@item.Type</option>
+						}
+						@*<option value="">Material Type </option>
 										
 					<option value="1">Chemicals</option>
 										
@@ -84,7 +88,7 @@ else
 										
 					<option value="5">Cotton Seeds</option>
 										
-					<option value="6">Electronics Consumer Durables</option>
+					<option value="6">Electronics Consumer Durables</option>*@
 										
 					@*<option value="9">Fertilizers</option>
 										
@@ -92,7 +96,7 @@ else
 										
 					<option value="11">Furniture and Wood Products</option>*@
 										
-					<option value="3">Household Goods</option>
+					@*<option value="3">Household Goods</option>*@
 										
 					@*<option value="13">Industrial Equipment</option>
 										
@@ -106,7 +110,7 @@ else
 										
 					<option value="19">Medicals</option>*@
 										
-					<option value="4">Metal and steels</option>
+					@*<option value="4">Metal and steels</option>*@
 										
 					@*<option value="21">Others</option>
 										
@@ -131,7 +135,7 @@ else
 					<option value="33">Glass Material</option>
 										
 					<option value="34">Transformer Equipments</option>		*@								
-				</select>
+				</InputSelect>
 			</div>
 
 			<div class="col d-flex align-items-start">

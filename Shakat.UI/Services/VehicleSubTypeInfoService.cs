@@ -71,12 +71,35 @@ namespace Shakat.UI.Services
             }
         }
 
-        public Task<VehicleSubTypeInfoDto> GetById(int id)
+        public async Task<VehicleSubTypeInfoDto> GetById(int id)
         {
-            throw new NotImplementedException();
-        }
+			try
+			{
+				var response = await _httpClient.GetFromJsonAsync<VehicleSubTypeInfoDto>($"https://localhost:44395/api/VehicleSubTypeInfo/{id}");
+				return response;
+			}
+			catch (Exception ex)
+			{
 
-        public async Task<VehicleSubTypeInfoDto> UpdateSubType(VehicleSubTypeInfoDto vehicleSubTypeInfoDto)
+				throw;
+			}
+		}
+
+		public async Task<IEnumerable<VehicleSubTypeInfoDto>> GetByVehicleTypeId(int id)
+		{
+			try
+			{
+				var response = await _httpClient.GetFromJsonAsync<IEnumerable<VehicleSubTypeInfoDto>>($"https://localhost:44395/api/VehicleSubTypeInfo/GetByVehicleTypeId/{id}");
+				return response;
+			}
+			catch (Exception ex)
+			{
+
+				throw;
+			}
+		}
+
+		public async Task<VehicleSubTypeInfoDto> UpdateSubType(VehicleSubTypeInfoDto vehicleSubTypeInfoDto)
         {
             try
             {

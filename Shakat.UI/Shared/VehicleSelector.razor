@@ -1,9 +1,6 @@
 ﻿@inject IModalService modal
-
-@*    <button @onclick="@(()=>modal.Show<Pages.HelloWorld>("Add new Word"))" 
-        class="btn btn-primary">Add Word</button>
-	<button @onclick="@(()=>modal.Show<OpenTruckModal>("Open Truck"))" 
-        class="btn btn-primary">Add Word</button>*@
+@using Shakat.Shared.Models;
+@using Shakat.UI.Services.Contracts
 
 <div class="vehicle-selector row">
 	<div class="col-sm-3"><span id="select_truck" style="color: rgb(198, 12, 12); font-weight: bold; text-align: right; font-size: 16px; display: none;">Select Preferred Truck &gt;&gt;</span></div>
@@ -56,3 +53,35 @@
 	</div>
 	<div class="col-sm-3"></div>
 </div>
+@*<hr />
+<div>
+	<EditForm Model="@newVehicleTypeInfoDtoObject">
+		<InputRadioGroup @bind-Value="newVehicleTypeInfoDtoObject.VehicleTypeInfoId">
+			@foreach (var item in VehicleTypeInfos)
+			{
+			<div>
+				<InputRadio id="1radio" Value="@item.VehicleTypeInfoId" checked="checked" />@item.Type
+			</div>
+			}
+		</InputRadioGroup>
+
+	</EditForm>
+</div>*@
+
+@code{
+
+	[Inject]
+
+	public IVehicleTypeInfoService VehicleTypeService { get; set; }
+
+	public IEnumerable<VehicleTypeInfoDto> VehicleTypeInfos { get; set; } = new List<VehicleTypeInfoDto>();
+
+	public VehicleTypeInfoDto newVehicleTypeInfoDtoObject { get; set; } = new();
+
+	//private VehicleTypeInfoDto _model = new() { newVehicleTypeInfoDtoObject = VehicleTypeInfos.Unknown };
+
+	protected override async Task OnInitializedAsync()
+	{
+		VehicleTypeInfos = await VehicleTypeService.GetAll();
+	}
+}

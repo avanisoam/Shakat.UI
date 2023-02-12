@@ -1,6 +1,15 @@
-﻿<div class="modal-body">
+﻿@using Shakat.Shared.Models;
+@using Shakat.UI.Services.Contracts;
+<div class="modal-body">
 	<div class="sub-type-radio-collection row">
-		<div class="col-sm-3  col-xs-6">
+		@foreach (var containerTruck in VehicleSubTypeInfos)
+		{
+			<div class="col-sm-3  col-xs-6">
+				<input class="truck-subtype-radio" name="vehicletype" type="radio" id="containerTruck_15" value="@containerTruck.VehicleSubTypeInfoId">
+				<label class="truck-subtype-label" onclick="setTruck('@containerTruck.SubType')" for="containerTruck_15">@containerTruck.SubType</label>
+			</div>
+		}
+		@*<div class="col-sm-3  col-xs-6">
 			<input class="truck-subtype-radio" name="vehicletype" type="radio" id="containerTruck_15" value="15">
 			<label class="truck-subtype-label" onclick="setTruck('Truck Container 20 Feet SXL 6 Tons')" for="containerTruck_15">20 Feet SXL 6 Tons</label>
 		</div>
@@ -11,10 +20,27 @@
 		<div class="col-sm-3  col-xs-6">
 			<input class="truck-subtype-radio" name="vehicletype" type="radio" id="containerTruck_23" value="23">
 			<label class="truck-subtype-label" onclick="setTruck('Truck Container 32 feet SXL 7 Tons')" for="containerTruck_23">32 feet SXL 7 Tons</label>
-		</div>
+		</div>*@
 	</div>
 </div>
 
 <div class="modal-footer">
 	<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
 </div>
+
+@code {
+
+	[Inject]
+
+	public IVehicleSubTypeInfoService VehicleSubTypeService { get; set; }
+
+	public IEnumerable<VehicleSubTypeInfoDto> VehicleSubTypeInfos { get; set; } = new List<VehicleSubTypeInfoDto>();
+
+	public VehicleSubTypeInfoDto newVehicleSubTypeInfoDtoObject { get; set; } = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		VehicleSubTypeInfos = await VehicleSubTypeService.GetByVehicleTypeId(3);
+	}
+
+}

@@ -18,12 +18,12 @@ builder.Services.AddScoped<IWeatherService, WeatherService>();
 builder.Services.AddScoped<IHelloWorldService, HelloWorldService>();
 
 builder.Services.AddScoped<ILogisticsOrderService, LogisticsOrderService>();
-//builder.Services.AddScoped<IVehicleSubTypeService, VehicleSubTypeService>();
+builder.Services.AddScoped<IVehicleSubTypeInfoService, VehicleSubTypeInfoService>();
 //builder.Services.AddScoped<IVehicleTypeService, VehicleTypeService>();
 
 builder.Services.AddScoped<IRouteInfoService, RouteInfoService>();
-builder.Services.AddScoped<IRouteInfoService, RouteInfoService>();
- builder.Services.AddScoped<IRouteInfoService, RouteInfoService>();
+ builder.Services.AddScoped<IMaterialTypeInfoService, MaterialTypeInfoService>();
+builder.Services.AddScoped<IVehicleTypeInfoService, VehicleTypeInfoService>();
 builder.Services.AddScoped<IShipmentService, ShipmentService>();
 builder.Services.AddScoped<IDummyService, DummyService>();
 #endregion DI End

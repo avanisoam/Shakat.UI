@@ -11,25 +11,36 @@ namespace Shakat.UI.Pages
         [Inject]
         public ILogisticsOrderService LogisticsOrderService { get; set; }
 
+		[Inject]
+		public IMaterialTypeInfoService MaterialTypeInfoService { get; set; }
+
         public LogisticsOrderRequestDto newLogisticsOrderObject { get; set; } = new();
 
         public IEnumerable<LogisticsOrderResponseDto> LogisticsOrders { get; set; } = new List<LogisticsOrderResponseDto>();
+
+        public IEnumerable<MaterialTypeInfoDto> MaterialTypeInfos { get; set; } = new List<MaterialTypeInfoDto>();
+
+        public MaterialTypeInfoDto materialTypeInfoDtoObject { get; set; } = new();
 
         [Inject]
         NavigationManager MyNavigationManager { get; set; }
 
         public string Value { get; set; }
 
+        public int MaterialTypeInfoId { get; set; }
+
         public EventCallback<string> ValueChanged { get; set; }
 
 
         protected override async Task OnInitializedAsync()
         {
+            
             newLogisticsOrderObject.CustomerId = 1;
             newLogisticsOrderObject.VehicleSubTypeId = 1;
             newLogisticsOrderObject.ProductId = 5;
 
             LogisticsOrders = await LogisticsOrderService.GetAllLogisticsOrders();
+            MaterialTypeInfos = await MaterialTypeInfoService.GetAll();
 
             
             //NewOrder = new Order
@@ -49,6 +60,7 @@ namespace Shakat.UI.Pages
 
         public async Task AddItem()
         {
+            newLogisticsOrderObject.MaterialTypeId = MaterialTypeInfoId;
             await LogisticsOrderService.CreateLogisticOrder(newLogisticsOrderObject);
 
             newLogisticsOrderObject = new();

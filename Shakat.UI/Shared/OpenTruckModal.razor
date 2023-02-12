@@ -1,5 +1,7 @@
 ﻿@page "/poc"
 @using System.ComponentModel.DataAnnotations
+@using Shakat.Shared.Models;
+@using Shakat.UI.Services.Contracts;
 
 @*<div class="modal" id="opentruckModal" role="dialog" data-backdrop="static" data-keyboard="false">
 	<div class="modal-dialog">*@
@@ -10,14 +12,21 @@
 				<h4 class="modal-title text-center">Open Truck</h4>
 			</div>*@
 
-			<EditForm Model="@_model" OnValidSubmit="@HandleValidSubmit">
+<EditForm Model="@newVehicleSubTypeInfoDtoObject" OnValidSubmit="@HandleValidSubmit">
 
 				<DataAnnotationsValidator />
 				<ValidationSummary />
 
 				<div class="modal-body">
 					<div class="sub-type-radio-collection row">
+						@foreach (var openTruck in VehicleSubTypeInfos)
+						{
 						<div class="col-sm-3 col-xs-6">
+					<input class="truck-subtype-radio" name="vehicletype" type="radio" id="openTruck_1" value="@openTruck.VehicleSubTypeInfoId">
+					<label class="truck-subtype-label" onclick="setTruck('@openTruck.SubType')" for="openTruck_1">@openTruck.SubType</label>
+						</div>
+						}
+						@*<div class="col-sm-3 col-xs-6">
 							<input class="truck-subtype-radio" name="vehicletype" type="radio" id="openTruck_1" value= "1">
 							<label class="truck-subtype-label" onclick="setTruck('Open Truck 14 Feet 3.5 Tons')" for="openTruck_1">14 Feet 3.5 Tons</label>
 						</div>
@@ -40,21 +49,21 @@
 						<div class="col-sm-3 col-xs-6">
 							<input class="truck-subtype-radio" name="vehicletype" type="radio" id="openTruck_7" value="7">
 							<label class="truck-subtype-label" onclick="setTruck('Open Truck 14 Wheel 30 Tons')" for="openTruck_7">14 Wheel 30 Tons</label>
-						</div>
+						</div>*@
 
-						 <p>
-							<InputRadioGroup @bind-Value="_model.OpenTruck">
-														
-								@foreach (var manufacturer in (OpenTrucks[])Enum.GetValues(typeof(OpenTrucks)))
+						@* <p>
+				<InputRadioGroup @bind-Value="newVehicleSubTypeInfoDtoObject.VehicleSubTypeInfoId">
+
+					@foreach (var openTruck in VehicleSubTypeInfos)
 								{
-									<div class="col-sm-3 col-xs-6">
-										<InputRadio class="truck-subtype-radio" Value="@manufacturer" />
-										<label class="truck-subtype-label" onclick="setTruck('Open Truck 14 Wheel 30 Tons')" for="openTruck_7"><text>&nbsp;</text>@manufacturer</label>
+						<div class="col-sm-3 col-xs-6">
+							<InputRadio class="truck-subtype-radio" Value="@openTruck.VehicleSubTypeInfoId" />@openTruck.SubType
+							<label class="truck-subtype-label" onclick="setTruck('@openTruck.SubType')" for="openTruck_7"><text>&nbsp;</text>@openTruck.SubType</label>
 									</div>																
 								}
 
 							</InputRadioGroup>
-						</p>
+						</p>*@
 
 					</div>
 				</div>
@@ -67,12 +76,25 @@
 
 			</EditForm> 
 
-		@*</div>*@
+		@*</div>
 
 @*	</div>
 </div>*@
 
 @code {
+
+	[Inject]
+
+	public IVehicleSubTypeInfoService VehicleSubTypeService { get; set; }
+
+	public IEnumerable<VehicleSubTypeInfoDto> VehicleSubTypeInfos { get; set; } = new List<VehicleSubTypeInfoDto>();
+
+	public VehicleSubTypeInfoDto newVehicleSubTypeInfoDtoObject { get; set; } = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		VehicleSubTypeInfos = await VehicleSubTypeService.GetByVehicleTypeId(2);
+	}
 
     public enum OpenTrucks { SpaceX, NASA, ULA, VirginGalactic, Unknown }
 
