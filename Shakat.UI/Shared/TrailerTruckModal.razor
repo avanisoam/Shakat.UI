@@ -5,8 +5,8 @@
 		@foreach (var trailerTruck in VehicleSubTypeInfos)
 		{
 			<div class="col-sm-3  col-xs-6">
-				<input class="truck-subtype-radio" name="vehicletype" type="radio" id="trailerTruck_10" value="@trailerTruck.VehicleSubTypeInfoId">
-				<label class="truck-subtype-label" onclick="setTruck('@trailerTruck.SubType')" for="trailerTruck_10">@trailerTruck.SubType</label>
+				<input class="truck-subtype-radio" name="vehicletype" type="radio" id="trailerTruck_10" onclick="@(()=>setTruck(@trailerTruck.VehicleSubTypeInfoId))">
+				<label class="truck-subtype-label" for="trailerTruck_10">@trailerTruck.SubType</label>
 			</div>
 		}
 		@*<div class="col-sm-3  col-xs-6">
@@ -36,7 +36,7 @@
 	</div>
 </div>
 <div class="modal-footer">
-	<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+	<button type="button" class="btn btn-default" data-dismiss="modal" onclick="@CloseModal">Ok</button>
 </div>
 
 @code {
@@ -49,9 +49,24 @@
 
 	public VehicleSubTypeInfoDto newVehicleSubTypeInfoDtoObject { get; set; } = new();
 
+	[CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
+	[Parameter]
+	public int VehicleSubTypeInfoId { get; set; }
+
 	protected override async Task OnInitializedAsync()
 	{
 		VehicleSubTypeInfos = await VehicleSubTypeService.GetByVehicleTypeId(1);
+	}
+
+	public async Task CloseModal()
+	{
+		await BlazoredModal.CloseAsync(ModalResult.Ok(VehicleSubTypeInfoId));
+	}
+
+	public void setTruck(int id)
+	{
+		VehicleSubTypeInfoId = id;
 	}
 
 }

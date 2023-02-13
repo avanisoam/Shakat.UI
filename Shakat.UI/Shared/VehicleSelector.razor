@@ -2,12 +2,27 @@
 @using Shakat.Shared.Models;
 @using Shakat.UI.Services.Contracts
 
+
 <div class="vehicle-selector row">
 	<div class="col-sm-3"><span id="select_truck" style="color: rgb(198, 12, 12); font-weight: bold; text-align: right; font-size: 16px; display: none;">Select Preferred Truck &gt;&gt;</span></div>
 	<div class="col-sm-6 row">
+		@*@foreach (var vehicleType in VehicleTypeInfos)
+		{
 		<div class="col-sm-4">
 			<input type="radio" class="truck-radio" name="truck-type" id="open"
-				@onclick="@(()=>modal.Show<OpenTruckModal>("Open Truck"))">
+				   @onclick="@(async () => await ShowModal(vehicleType.VehicleTypeInfoId))">
+			<label class="truck-label" for="open" data-toggle="modal" data-target="#opentruckModal">
+				<div style="">
+					<img src="images/Open body truck.png" alt="Open body truck" style="width:60px; height:60px;">
+					<span>Open Truck</span>
+				</div>
+			</label>
+
+		</div>
+		}*@
+		<div class="col-sm-4">
+			<input type="radio" class="truck-radio" name="truck-type" id="open"
+				   @onclick="ShowOpenTruckModal">
 			<label class="truck-label" for="open" data-toggle="modal" data-target="#opentruckModal">
 				<div style="">
 					<img src="images/Open body truck.png" alt="" style="width:60px; height:60px;">
@@ -18,7 +33,7 @@
 		</div>
 		<div class="col-sm-4">
 			<input type="radio" class="truck-radio" name="truck-type" id="container"
-				@onclick="@(()=>modal.Show<ContainerTruckModal>("Container Truck"))">
+				   @onclick="ShowContainerTruckModal">
 			<label class="truck-label" for="container" data-toggle="modal" data-target="#containertruckModal">
 				<div>
 					<img src="images/Container.png" alt="" style="width:60px; height:60px;">
@@ -29,13 +44,14 @@
 		</div>
 		<div class="col-sm-4">
 			<input type="radio" class="truck-radio" name="truck-type" id="trailer"
-				@onclick="@(()=>modal.Show<TrailerTruckModal>("Trailer Truck"))">
+				   @onclick="ShowTrailerTruckModal">
 			<label class="truck-label" for="trailer" data-toggle="modal" data-target="#trailertruckModal">
 				<div>
 					<img src="images/Trailer.png" alt="" style="width:60px; height:60px;">
 					<span>Trailer</span>
 				</div>
 			</label>
+		</div>
 			<div class="modal fade" id="trailertruckModal" role="dialog" data-backdrop="static" data-keyboard="false" style="display: none;">
 				<div class="modal-dialog">
 
@@ -52,7 +68,6 @@
 		</div>
 	</div>
 	<div class="col-sm-3"></div>
-</div>
 @*<hr />
 <div>
 	<EditForm Model="@newVehicleTypeInfoDtoObject">
@@ -78,10 +93,57 @@
 
 	public VehicleTypeInfoDto newVehicleTypeInfoDtoObject { get; set; } = new();
 
-	//private VehicleTypeInfoDto _model = new() { newVehicleTypeInfoDtoObject = VehicleTypeInfos.Unknown };
+	[CascadingParameter] public IModalService Modal { get; set; } = default!;
+
+	[CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
+	[Parameter]
+	public int VehicleSubTypeId { get; set; }
+
+	[Parameter] public EventCallback<int> OnClick { get; set; }
 
 	protected override async Task OnInitializedAsync()
 	{
 		VehicleTypeInfos = await VehicleTypeService.GetAll();
+		//await ShowOpenTruckModal();
+	}
+
+	public async Task ShowOpenTruckModal()
+	{
+		var modalOpenTruck = modal.Show<OpenTruckModal>();
+		var result = await modalOpenTruck.Result;
+		
+		if (!result.Cancelled)
+		{
+			VehicleSubTypeId = (int)result.Data;
+			//await BlazoredModal.CloseAsync(ModalResult.Ok(result.Data));
+			OnClick.InvokeAsync(VehicleSubTypeId);
+		}
+	}
+
+	public async Task ShowContainerTruckModal()
+	{
+		var modalContainerTruck = modal.Show<ContainerTruckModal>();
+		var result = await modalContainerTruck.Result;
+
+		if (!result.Cancelled)
+		{
+			VehicleSubTypeId = (int)result.Data;
+			//await BlazoredModal.CloseAsync(ModalResult.Ok(result.Data));
+			OnClick.InvokeAsync(VehicleSubTypeId);
+		}
+	}
+
+	public async Task ShowTrailerTruckModal()
+	{
+		var modalTrailerTruck = modal.Show<TrailerTruckModal>();
+		var result = await modalTrailerTruck.Result;
+
+		if (!result.Cancelled)
+		{
+			VehicleSubTypeId = (int)result.Data;
+			//await BlazoredModal.CloseAsync(ModalResult.Ok(result.Data));
+			OnClick.InvokeAsync(VehicleSubTypeId);
+		}
 	}
 }

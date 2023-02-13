@@ -11,7 +11,9 @@
 			<div class="modal-header">
 				<h4 class="modal-title text-center">Open Truck</h4>
 			</div>*@
-
+<h4>@VehicleSubTypeInfoId</h4>
+@*<input type="radio" class="truck-radio" name="truck-type" id="open"
+	   @onclick="@(()=>setTruck(100))">*@
 <EditForm Model="@newVehicleSubTypeInfoDtoObject" OnValidSubmit="@HandleValidSubmit">
 
 				<DataAnnotationsValidator />
@@ -22,8 +24,8 @@
 						@foreach (var openTruck in VehicleSubTypeInfos)
 						{
 						<div class="col-sm-3 col-xs-6">
-					<input class="truck-subtype-radio" name="vehicletype" type="radio" id="openTruck_1" value="@openTruck.VehicleSubTypeInfoId">
-					<label class="truck-subtype-label" onclick="setTruck('@openTruck.SubType')" for="openTruck_1">@openTruck.SubType</label>
+					<input class="truck-subtype-radio" name="vehicletype" type="radio" id="openTruck_1" onclick="@(()=>setTruck(@openTruck.VehicleSubTypeInfoId))">
+					<label class="truck-subtype-label" for="openTruck_1">@openTruck.SubType</label>
 						</div>
 						}
 						@*<div class="col-sm-3 col-xs-6">
@@ -69,10 +71,8 @@
 				</div>
 
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="@CloseModal">Ok</button>
 				</div>
-
-				<button type="submit">Submit</button>
 
 			</EditForm> 
 
@@ -91,25 +91,40 @@
 
 	public VehicleSubTypeInfoDto newVehicleSubTypeInfoDtoObject { get; set; } = new();
 
+	[CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
+	[Parameter]
+	public int VehicleSubTypeInfoId { get; set; }
+
 	protected override async Task OnInitializedAsync()
 	{
 		VehicleSubTypeInfos = await VehicleSubTypeService.GetByVehicleTypeId(2);
 	}
 
-    public enum OpenTrucks { SpaceX, NASA, ULA, VirginGalactic, Unknown }
+	public enum OpenTrucks { SpaceX, NASA, ULA, VirginGalactic, Unknown }
 
-    private TestModel _model = new() { OpenTruck = OpenTrucks.Unknown };
+	private TestModel _model = new() { OpenTruck = OpenTrucks.Unknown };
 
-    public class TestModel
-    {       
-        [Required]
-        [Range(typeof(OpenTrucks), nameof(OpenTrucks.SpaceX),
-        nameof(OpenTrucks.VirginGalactic), ErrorMessage = "Pick a manufacturer.")]
-        public OpenTrucks OpenTruck { get; set; } = OpenTrucks.Unknown;
-    }
+	public class TestModel
+	{       
+		[Required]
+		[Range(typeof(OpenTrucks), nameof(OpenTrucks.SpaceX),
+		nameof(OpenTrucks.VirginGalactic), ErrorMessage = "Pick a manufacturer.")]
+		public OpenTrucks OpenTruck { get; set; } = OpenTrucks.Unknown;
+	}
 
-    private void HandleValidSubmit()
-    {
-        //...
-    }
+	private void HandleValidSubmit()
+	{
+		//...
+	}
+
+	public async Task CloseModal()
+	{
+		await BlazoredModal.CloseAsync(ModalResult.Ok(VehicleSubTypeInfoId));
+	}
+
+	public void setTruck(int id)
+	{
+		VehicleSubTypeInfoId = id;
+	}
 }
