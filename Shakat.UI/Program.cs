@@ -19,7 +19,7 @@ builder.Services.AddScoped<IHelloWorldService, HelloWorldService>();
 
 builder.Services.AddScoped<ILogisticsOrderService, LogisticsOrderService>();
 builder.Services.AddScoped<IVehicleSubTypeInfoService, VehicleSubTypeInfoService>();
-//builder.Services.AddScoped<IVehicleTypeService, VehicleTypeService>();
+builder.Services.AddScoped<IProductCategoryInfoService, ProductCategoryInfoService>();
 
 builder.Services.AddScoped<IRouteInfoService, RouteInfoService>();
  builder.Services.AddScoped<IMaterialTypeInfoService, MaterialTypeInfoService>();
