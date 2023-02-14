@@ -36,7 +36,7 @@ namespace Shakat.UI.Pages.Admin
 
             dummyDtos = await DummyService.GetAll();
 
-            MyNavigationManager.NavigateTo("admin/dummyDto");
+            MyNavigationManager.NavigateTo("admin/dummy");
         }
 
         public async Task UpdateItem()
@@ -48,7 +48,7 @@ namespace Shakat.UI.Pages.Admin
 
             dummyDtos = await DummyService.GetAll();
 
-            MyNavigationManager.NavigateTo("admin/dummyDto");
+            MyNavigationManager.NavigateTo("admin/dummy");
 
         }
 
@@ -58,7 +58,7 @@ namespace Shakat.UI.Pages.Admin
 
             dummyDtos = await DummyService.GetAll();
 
-            MyNavigationManager.NavigateTo("admin/dummyDto");
+            MyNavigationManager.NavigateTo("admin/dummy");
         }
 
         public Task OnValueChanged(ChangeEventArgs e)

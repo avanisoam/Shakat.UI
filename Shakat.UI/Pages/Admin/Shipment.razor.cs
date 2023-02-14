@@ -24,7 +24,7 @@ namespace Shakat.UI.Pages.Admin
             shipmentDtos = await ShipmentService.GetAll();
         }
 
-        public async Task AddItem()
+        public async Task AddItem()   //Not WOrking
         {
             await ShipmentService.Create(newShipmentObject);
 
@@ -32,7 +32,7 @@ namespace Shakat.UI.Pages.Admin
 
             shipmentDtos = await ShipmentService.GetAll();
 
-            MyNavigationManager.NavigateTo("admin/shipmentDto");
+            MyNavigationManager.NavigateTo("admin/shipment");
         }
 
         public async Task UpdateItem()
@@ -44,7 +44,7 @@ namespace Shakat.UI.Pages.Admin
 
             shipmentDtos = await ShipmentService.GetAll();
 
-            MyNavigationManager.NavigateTo("admin/shipmentDto");
+            MyNavigationManager.NavigateTo("admin/shipment");
 
         }
 
@@ -54,7 +54,7 @@ namespace Shakat.UI.Pages.Admin
 
             shipmentDtos = await ShipmentService.GetAll();
 
-            MyNavigationManager.NavigateTo("admin/shipmentDto");
+            MyNavigationManager.NavigateTo("admin/shipment");
         }
 
     }

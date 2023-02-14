@@ -75,7 +75,7 @@ namespace Shakat.UI.Services
             throw new NotImplementedException();
         }
 
-        public async Task<VehicleTypeInfoDto> UpdateSubType(VehicleTypeInfoDto vehicleTypeInfoDto)
+        public async Task<VehicleTypeInfoDto> Update(VehicleTypeInfoDto vehicleTypeInfoDto)
         {
             try
             {

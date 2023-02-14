@@ -8,7 +8,7 @@ namespace Shakat.UI.Services.Contracts
         Task<VehicleTypeInfoDto> GetById(int id);
         Task<VehicleTypeInfoDto> Create(VehicleTypeInfoDto vehicleTypeDto);
 
-        Task<VehicleTypeInfoDto> UpdateSubType(VehicleTypeInfoDto vehicleTypeDto);
+        Task<VehicleTypeInfoDto> Update(VehicleTypeInfoDto vehicleTypeDto);
 
         Task<VehicleTypeInfoDto> Delete(int id);
     }

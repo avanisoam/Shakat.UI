@@ -24,7 +24,7 @@ namespace Shakat.UI.Pages.Admin
             routeInfoDtos = await RouteInfoService.GetAll();
         }
 
-        public async Task AddItem()
+        public async Task AddItem() 
         {
             await RouteInfoService.Create(newRouteInfoObject);
 
@@ -32,7 +32,7 @@ namespace Shakat.UI.Pages.Admin
 
             routeInfoDtos = await RouteInfoService.GetAll();
 
-            MyNavigationManager.NavigateTo("admin/routeInfoDto");
+            MyNavigationManager.NavigateTo("admin/routeInfo");
         }
 
         public async Task UpdateItem()
@@ -44,7 +44,7 @@ namespace Shakat.UI.Pages.Admin
 
             routeInfoDtos = await RouteInfoService.GetAll();
 
-            MyNavigationManager.NavigateTo("admin/routeInfoDto");
+            MyNavigationManager.NavigateTo("admin/routeInfo");
 
         }
 
@@ -54,7 +54,7 @@ namespace Shakat.UI.Pages.Admin
 
             routeInfoDtos = await RouteInfoService.GetAll();
 
-            MyNavigationManager.NavigateTo("admin/routeInfoDto");
+            MyNavigationManager.NavigateTo("admin/routeInfo");
         }
 
     }

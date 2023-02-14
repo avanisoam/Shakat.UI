@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Admin\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Shakat.Shared\Shakat.Shared\Shakat.Shared.csproj" />
   </ItemGroup>
 

@@ -30,16 +30,24 @@ else if (Action == "Create")
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
-            <dt class = "col-sm-2">
-               Vehicle Type Id
+            <dt class="col-sm-2">
+                Vehicle Destination
             </dt>
-            <dd class = "col-sm-12">
+            <dd class="col-sm-12">
                 <div class="form-group">
-                    <input @bind="newRouteInfoObject.RouteInfoId" />
+                    <input @bind="newRouteInfoObject.Destination" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </dd>
-            
+            <dt class="col-sm-2">
+                Distance Between
+            </dt>
+            <dd class="col-sm-12">
+                <div class="form-group">
+                    <input @bind="newRouteInfoObject.Distance" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </dd>
         </dl>
         <button class="btn btn-success" @onclick="AddItem">Add</button>
     </div>
