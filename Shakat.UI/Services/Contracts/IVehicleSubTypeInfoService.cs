@@ -10,7 +10,7 @@ namespace Shakat.UI.Services.Contracts
 		Task<IEnumerable<VehicleSubTypeInfoDto>> GetByVehicleTypeId(int id);
 		Task<VehicleSubTypeInfoDto> Create(VehicleSubTypeInfoDto vehicleSubTypeInfoDto);
 
-        Task<VehicleSubTypeInfoDto> UpdateSubType(VehicleSubTypeInfoDto vehicleSubTypeInfoDto);
+        Task<VehicleSubTypeInfoDto> Update(VehicleSubTypeInfoDto vehicleSubTypeInfoDto);
 
         Task<VehicleSubTypeInfoDto> Delete(int id);
     }

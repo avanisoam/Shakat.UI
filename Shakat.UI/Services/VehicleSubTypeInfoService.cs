@@ -99,7 +99,7 @@ namespace Shakat.UI.Services
 			}
 		}
 
-		public async Task<VehicleSubTypeInfoDto> UpdateSubType(VehicleSubTypeInfoDto vehicleSubTypeInfoDto)
+		public async Task<VehicleSubTypeInfoDto> Update(VehicleSubTypeInfoDto vehicleSubTypeInfoDto)
         {
             try
             {
