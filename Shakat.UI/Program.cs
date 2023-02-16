@@ -26,6 +26,8 @@ builder.Services.AddScoped<IRouteInfoService, RouteInfoService>();
 builder.Services.AddScoped<IVehicleTypeInfoService, VehicleTypeInfoService>();
 builder.Services.AddScoped<IShipmentService, ShipmentService>();
 builder.Services.AddScoped<IDummyService, DummyService>();
+builder.Services.AddScoped<IDeviceInfoService, DeviceInfoService>();
+builder.Services.AddScoped<IDeviceHistoryService, DeviceHistoryService>();
 #endregion DI End
 
 await builder.Build().RunAsync();
